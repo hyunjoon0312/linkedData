@@ -69,8 +69,7 @@
 	</section>
 <%
 	}else{
+		response.sendRedirect("AfterLoginR.html");}
 %>
-	<a href ="AfterLoginR.html" />
-<%} %>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>NECA승인처 로그인</title>
+<title>NECA INDEXER 로그인</title>
 <style>
 	#loginFormArea{
 		margin : auto;
@@ -36,13 +36,13 @@
 </head>
 <body>
 <% 
-	String NEOKid = (String)session.getAttribute("NEOKid");
+	String INid = (String)session.getAttribute("INid");
 
-	if(NEOKid == null){
+	if(INid == null){
 %>
     <section  id = "loginFormArea">
-	<h1>보건의료 플랫폼(NECA승인처)</h1>
-	<form action="loginNEOK" method = "POST">
+	<h1>보건의료 플랫폼(NECA Indexer)</h1>
+	<form action="loginIN" method = "POST">
 		<fieldset>
 			<table>
 				<tr>
@@ -50,7 +50,7 @@
 					<label for = "id">아이디 : </label>
 					</td>
 					<td class = "td_right">
-					<input type = "text" name = "NEOKid" id = "NEOKid"/>
+					<input type = "text" name = "INid" id = "INid"/>
 					</td>
 				</tr>
 				<tr>
@@ -58,7 +58,7 @@
 					<label for = "passwd">비밀번호 : </label>
 					</td>
 					<td class = "td_right">
-					<input type = "password" name = "NEOKpasswd" id = "NEOKpasswd"/>
+					<input type = "password" name = "INpasswd" id = "INpasswd"/>
 					</td>
 				</tr>
 			</table>
@@ -69,7 +69,7 @@
 	</section>
 <%
 	}else{
-		response.sendRedirect("AfterLoginNEOK.html");}
+		response.sendRedirect("AfterLoginIN.html");}
 %>
 </body>
 </html>
