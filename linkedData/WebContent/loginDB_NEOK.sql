@@ -6,4 +6,4 @@ CREATE TABLE NEOKusers(
 	PRIMARY KEY(NEOKid)
 	);
 	
-	INSERT INTO NEOKusers VALUES ('test', password('test'), 'joon', 'joon@gmail.com');
+	INSERT INTO NEOKusers VALUES ('neoktest', password('neoktest'), 'joon', 'joon@gmail.com');

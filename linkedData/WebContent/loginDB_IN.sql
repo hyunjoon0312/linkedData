@@ -6,4 +6,4 @@ CREATE TABLE INusers(
 	PRIMARY KEY(INid)
 	);
 	
-	INSERT INTO INusers VALUES ('INtest', password('INtest'), 'joon', 'joon@gmail.com');
+	INSERT INTO INusers VALUES ('intest', password('intest'), 'joon', 'joon@gmail.com');

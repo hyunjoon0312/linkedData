@@ -6,4 +6,4 @@ CREATE TABLE Rusers(
 	PRIMARY KEY(Rid)
 	);
 	
-	INSERT INTO Rusers VALUES ('test', password('test'), 'joon', 'joon@gmail.com');
+	INSERT INTO Rusers VALUES ('rtest', password('rtest'), 'joon', 'joon@gmail.com');
