@@ -1,3 +1,4 @@
+<%@page import="vo.MemberR"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -36,7 +37,7 @@
 </head>
 <body>
 <% 
-	String Rid = (String)session.getAttribute("Rid");
+	MemberR Rid = ((MemberR)session.getAttribute("Rid"));
 
 	if(Rid == null){
 %>

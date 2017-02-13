@@ -59,6 +59,38 @@ public class LoginDAOR {
 		return loginMemberR;
 	}
 	
+	public MemberR getMemberR(String Rid) {
+		// TODO Auto-generated method stub
+		MemberR loginMemberR = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = con.prepareStatement("SELECT * FROM Rusers WHERE Rid = ?");
+			pstmt.setString(1, Rid);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				loginMemberR = new MemberR();
+				loginMemberR.setREmail(rs.getString("Remail"));
+				loginMemberR.setRId(rs.getString("Rid"));
+				loginMemberR.setRName(rs.getString("Rname"));
+				loginMemberR.setRPasswd(rs.getString("Rpasswd"));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				close(rs);
+				close(pstmt);
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		}
+		return loginMemberR;
+	}
+	
 }
 
 
