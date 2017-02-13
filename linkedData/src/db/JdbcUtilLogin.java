@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-//µ¥ÀÌÅÍº£ÀÌ½º ÀÛ¾÷À» ÇÒ ¶§ ¹İº¹ÀûÀ¸·Î ¼öÇàÇØ¾ß ÇÏ´Â ÀÛ¾÷À» Á¤ÀÇÇÏ´Â Å¬·¡½º
+//ë°ì´í„°ë² ì´ìŠ¤ ì‘ì—…ì„ í•  ë•Œ ë°˜ë³µì ìœ¼ë¡œ ìˆ˜í–‰í•´ì•¼ í•˜ëŠ” ì‘ì—…ì„ ì •ì˜í•˜ëŠ” í´ë˜ìŠ¤
 public class JdbcUtilLogin {
 	
 	public static Connection getLoginConnection(){
@@ -14,7 +14,7 @@ public class JdbcUtilLogin {
 		
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			conLogin = DriverManager.getConnection("jdbc:mysql://210.115.187.74:3306/hyunjoon_study", "hyunjoon",
+			conLogin = DriverManager.getConnection("jdbc:mysql://112.72.158.187:3306/login", "hyunjoon",
 					"hyunjoon");
 			System.out.println("connect success");
 		}catch(Exception e){

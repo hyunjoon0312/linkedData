@@ -37,24 +37,24 @@ public class LoginServletR extends HttpServlet {
 		String Rpasswd = request.getParameter("Rpasswd");
 		LoginServiceR loginServiceR = new LoginServiceR();
 		MemberR loginMemberR = loginServiceR.getLoginMember(Rid,Rpasswd);
-		//·Î±×ÀÎÀÌ ¼º°øµÇ¸é Member °´Ã¼°¡ ³Ñ¾î¿À°í ½ÇÆĞÇÏ¸é nullÀÌ ³Ñ¾î¿È
+		//ë¡œê·¸ì¸ì´ ì„±ê³µë˜ë©´ Member ê°ì²´ê°€ ë„˜ì–´ì˜¤ê³  ì‹¤íŒ¨í•˜ë©´ nullì´ ë„˜ì–´ì˜´
 		
 		if(loginMemberR != null){
 			HttpSession session = request.getSession();
 			session.setAttribute("Rid", Rid);
 			response.sendRedirect("AfterLoginR.html");
-			System.out.println("·Î±×ÀÎ¼º°ø");
+			System.out.println("ë¡œê·¸ì¸ì„±ê³µ");
 		}else{
 			response.setCharacterEncoding("UTF-8");
 			
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('·Î±×ÀÎ ½ÇÆĞ');");
+			out.println("alert('ë¡œê·¸ì¸ ì‹¤íŒ¨');");
 			out.println("location.replace('LoginFormR.jsp')");
 			out.println("</script>");
 			out.close();
-			System.out.println("·Î±×ÀÎ½ÇÆĞ");
+			System.out.println("ë¡œê·¸ì¸ ì‹¤íŒ¨");
 			
 		}
 	}

@@ -37,24 +37,24 @@ public class LoginServletIN extends HttpServlet {
 		String INpasswd = request.getParameter("INpasswd");
 		LoginServiceIN loginServiceIN = new LoginServiceIN();
 		MemberIN loginMemberIN = loginServiceIN.getLoginMember(INid,INpasswd);
-		//·Î±×ÀÎÀÌ ¼º°øµÇ¸é Member °´Ã¼°¡ ³Ñ¾î¿À°í ½ÇÆĞÇÏ¸é nullÀÌ ³Ñ¾î¿È
+		//ë¡œê·¸ì¸ì´ ì„±ê³µë˜ë©´ Member ê°ì²´ê°€ ë„˜ì–´ì˜¤ê³  ì‹¤íŒ¨í•˜ë©´ nullì´ ë„˜ì–´ì˜´
 		
 		if(loginMemberIN != null){
 			HttpSession session = request.getSession();
 			session.setAttribute("INid", INid);
 			response.sendRedirect("AfterLoginIN.html");
-			System.out.println("·Î±×ÀÎ¼º°ø");
+			System.out.println("ë¡œê·¸ì¸ ì„±ê³µ");
 		}else{
 			response.setCharacterEncoding("UTF-8");
 			
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('·Î±×ÀÎ ½ÇÆĞ');");
+			out.println("alert('ë¡œê·¸ì¸ ì‹¤íŒ¨');");
 			out.println("location.replace('LoginFormIN.jsp')");
 			out.println("</script>");
 			out.close();
-			System.out.println("·Î±×ÀÎ½ÇÆĞ");
+			System.out.println("ë¡œê·¸ì¸ ì‹¤íŒ¨");
 			
 		}
 	}

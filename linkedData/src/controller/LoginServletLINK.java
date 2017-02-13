@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import svc.LoginServiceNEOK;
-import vo.MemberNEOK;
+import svc.LoginServiceLINK;
+import vo.MemberLINK;
 
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/loginNEOK")
-public class LoginServletNEOK extends HttpServlet {
+@WebServlet("/loginLINK")
+public class LoginServletLINK extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServletNEOK() {
+    public LoginServletLINK() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,17 +33,17 @@ public class LoginServletNEOK extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String NEOKid = request.getParameter("NEOKid");
-		String NEOKpasswd = request.getParameter("NEOKpasswd");
-		LoginServiceNEOK loginServiceNEOK = new LoginServiceNEOK();
-		MemberNEOK loginMemberNEOK = loginServiceNEOK.getLoginMember(NEOKid,NEOKpasswd);
+		String LINKid = request.getParameter("LINKid");
+		String LINKpasswd = request.getParameter("LINKpasswd");
+		LoginServiceLINK loginServiceLINK = new LoginServiceLINK();
+		MemberLINK loginMemberLINK = loginServiceLINK.getLoginMember(LINKid,LINKpasswd);
 		//로그인이 성공되면 Member 객체가 넘어오고 실패하면 null이 넘어옴
 		
-		if(loginMemberNEOK != null){
+		if(loginMemberLINK != null){
 			HttpSession session = request.getSession();
-			session.setAttribute("NEOKid", NEOKid);
-			response.sendRedirect("AfterLoginNEOK.html");
-			System.out.println("로그인 성공");
+			session.setAttribute("LINKid", LINKid);
+			response.sendRedirect("AfterLoginLINK.html");
+			System.out.println("로그인성공");
 		}else{
 			response.setCharacterEncoding("UTF-8");
 			
@@ -51,7 +51,7 @@ public class LoginServletNEOK extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('로그인 실패');");
-			out.println("location.replace('LoginFormNEOK.jsp')");
+			out.println("location.replace('LoginFormLINK.jsp')");
 			out.println("</script>");
 			out.close();
 			System.out.println("로그인 실패");
