@@ -11,10 +11,10 @@ public class LoginServiceNEOK {
 	public MemberNEOK getLoginMember(String NEOKid, String NEOKpasswd) {
 		// TODO Auto-generated method stub
 		LoginDAONEOK loginDAONEOK = LoginDAONEOK.getInstance();
-		Connection NEOKcon = getLoginConnection();
-		loginDAONEOK.setConnection(NEOKcon);
+		Connection con = getLoginConnection();
+		loginDAONEOK.setConnection(con);
 		MemberNEOK loginMemberNEOK = loginDAONEOK.selectLoginMemberNEOK(NEOKid,NEOKpasswd);
-		close(NEOKcon);
+		close(con);
 		return loginMemberNEOK;
 	}
 	

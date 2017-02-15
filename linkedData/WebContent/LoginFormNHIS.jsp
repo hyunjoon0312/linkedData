@@ -38,6 +38,8 @@
 <body>
 <% 
 	MemberNHIS NHISid = ((MemberNHIS)session.getAttribute("NHISid"));
+	String seNHISid = (String)session.getAttribute("NHISid");
+
 
 	if(NHISid == null){
 %>
@@ -70,7 +72,7 @@
 	</section>
 <%
 	}else{
-		response.sendRedirect("AfterLoginNHIS.html");}
+		response.sendRedirect("AfterLoginNHIS.jsp");}
 %>
 </body>
 </html>

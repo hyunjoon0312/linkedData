@@ -42,7 +42,7 @@ public class LoginServletNHIS extends HttpServlet {
 		if(loginMemberNHIS != null){
 			HttpSession session = request.getSession();
 			session.setAttribute("NHISid",  loginMemberNHIS);
-			response.sendRedirect("AfterLoginNHIS.html");
+			response.sendRedirect("AfterLoginNHIS.jsp");
 			System.out.println("로그인성공");
 		}else{
 			response.setCharacterEncoding("UTF-8");

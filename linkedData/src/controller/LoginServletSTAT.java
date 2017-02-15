@@ -42,7 +42,7 @@ public class LoginServletSTAT extends HttpServlet {
 		if(loginMemberSTAT != null){
 			HttpSession session = request.getSession();
 			session.setAttribute("STATid",  loginMemberSTAT);
-			response.sendRedirect("AfterLoginSTAT.html");
+			response.sendRedirect("AfterLoginSTAT.jsp");
 			System.out.println("로그인성공");
 		}else{
 			response.setCharacterEncoding("UTF-8");

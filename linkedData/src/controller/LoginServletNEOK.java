@@ -41,8 +41,8 @@ public class LoginServletNEOK extends HttpServlet {
 		
 		if(loginMemberNEOK != null){
 			HttpSession session = request.getSession();
-			session.setAttribute("NEOKid", NEOKid);
-			response.sendRedirect("AfterLoginNEOK.html");
+			session.setAttribute("NEOKid", loginMemberNEOK);
+			response.sendRedirect("AfterLoginNEOK.jsp");
 			System.out.println("로그인 성공");
 		}else{
 			response.setCharacterEncoding("UTF-8");

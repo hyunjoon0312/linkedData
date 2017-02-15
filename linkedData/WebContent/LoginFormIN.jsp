@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import='vo.MemberIN' %>    
 
 <!DOCTYPE html>
 <html>
@@ -36,7 +37,9 @@
 </head>
 <body>
 <% 
-	String INid = (String)session.getAttribute("INid");
+	MemberIN INid = ((MemberIN)session.getAttribute("INid"));
+	String seINid = (String)session.getAttribute("INid");
+
 
 	if(INid == null){
 %>
@@ -69,7 +72,7 @@
 	</section>
 <%
 	}else{
-		response.sendRedirect("AfterLoginIN.html");}
+		response.sendRedirect("AfterLoginIN.jsp");}
 %>
 </body>
 </html>

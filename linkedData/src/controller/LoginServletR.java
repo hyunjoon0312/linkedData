@@ -42,8 +42,12 @@ public class LoginServletR extends HttpServlet {
 		if(loginMemberR != null){
 			HttpSession session = request.getSession();
 			session.setAttribute("Rid",  loginMemberR);
-			response.sendRedirect("AfterLoginR.html");
+			response.sendRedirect("AfterLoginR.jsp");
 			System.out.println("로그인성공");
+			
+			
+
+			
 		}else{
 			response.setCharacterEncoding("UTF-8");
 			

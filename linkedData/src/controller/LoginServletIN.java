@@ -41,8 +41,8 @@ public class LoginServletIN extends HttpServlet {
 		
 		if(loginMemberIN != null){
 			HttpSession session = request.getSession();
-			session.setAttribute("INid", INid);
-			response.sendRedirect("AfterLoginIN.html");
+			session.setAttribute("INid", loginMemberIN);
+			response.sendRedirect("AfterLoginIN.jsp");
 			System.out.println("로그인 성공");
 		}else{
 			response.setCharacterEncoding("UTF-8");

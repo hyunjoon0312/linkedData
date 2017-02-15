@@ -1,3 +1,4 @@
+<%@page import="vo.MemberNEOK"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -5,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>NECA승인처 로그인</title>
+<title>NECA 승인처 로그인</title>
+
 <style>
 	#loginFormArea{
 		margin : auto;
@@ -35,14 +37,16 @@
 </style>
 </head>
 <body>
+
 <% 
-	String NEOKid = (String)session.getAttribute("NEOKid");
+	MemberNEOK NEOKid = ((MemberNEOK)session.getAttribute("NEOKid"));
+	String seNEOKid = (String)session.getAttribute("NEOKid");
 
 	if(NEOKid == null){
 %>
     <section  id = "loginFormArea">
-	<h1>보건의료 플랫폼(NECA승인처)</h1>
-	<form action="loginNEOK" method = "POST">
+	<h1>보건의료 플랫폼(NECA 승인처)</h1>
+	<form action="loginNEOK"  method = "POST">
 		<fieldset>
 			<table>
 				<tr>
@@ -63,13 +67,22 @@
 				</tr>
 			</table>
 			
-			<input type = "submit" value = "로그인" id = "selectButton"/>
+			
+			
+			<!-- <button id="login-button" class="btn btn-default" type="submit">LOGIN</button> -->
+			<input type = "submit" value = "로그인" id = "selectButton" />
+			
+			
 		</fieldset>
 	</form>
 	</section>
 <%
 	}else{
-		response.sendRedirect("AfterLoginNEOK.html");}
+		response.sendRedirect("AfterLoginNEOK.jsp");}
 %>
+
+
 </body>
+
+
 </html>

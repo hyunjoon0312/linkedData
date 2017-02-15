@@ -41,8 +41,8 @@ public class LoginServletLINK extends HttpServlet {
 		
 		if(loginMemberLINK != null){
 			HttpSession session = request.getSession();
-			session.setAttribute("LINKid", LINKid);
-			response.sendRedirect("AfterLoginLINK.html");
+			session.setAttribute("LINKid", loginMemberLINK);
+			response.sendRedirect("AfterLoginLINK.jsp");
 			System.out.println("로그인성공");
 		}else{
 			response.setCharacterEncoding("UTF-8");

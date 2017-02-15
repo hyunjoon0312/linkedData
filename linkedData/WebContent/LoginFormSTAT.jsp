@@ -38,6 +38,8 @@
 <body>
 <% 
 	MemberSTAT STATid = ((MemberSTAT)session.getAttribute("STATid"));
+	String seSTATid = (String)session.getAttribute("STATid");
+
 
 	if(STATid == null){
 %>
@@ -70,7 +72,7 @@
 	</section>
 <%
 	}else{
-		response.sendRedirect("AfterLoginSTAT.html");}
+		response.sendRedirect("AfterLoginSTAT.jsp");}
 %>
 </body>
 </html>

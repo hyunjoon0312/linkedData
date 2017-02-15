@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="vo.MemberLINK" %>
 
 <!DOCTYPE html>
 <html>
@@ -36,7 +37,9 @@
 </head>
 <body>
 <% 
-	String LINKid = (String)session.getAttribute("LINKid");
+	MemberLINK LINKid = ((MemberLINK)session.getAttribute("LINKid"));
+	String seLINKid = (String)session.getAttribute("LINKid");
+
 
 	if(LINKid == null){
 %>
@@ -69,7 +72,7 @@
 	</section>
 <%
 	}else{
-		response.sendRedirect("AfterLoginLINK.html");}
+		response.sendRedirect("AfterLoginLINK.jsp");}
 %>
 </body>
 </html>

@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>연구자 로그인</title>
+
+
 <style>
 	#loginFormArea{
 		margin : auto;
@@ -36,14 +38,17 @@
 </style>
 </head>
 <body>
+
 <% 
 	MemberR Rid = ((MemberR)session.getAttribute("Rid"));
+	String seRid = (String)session.getAttribute("Rid");
+
 
 	if(Rid == null){
 %>
     <section  id = "loginFormArea">
 	<h1>보건의료 플랫폼(연구자)</h1>
-	<form action="loginR" method = "POST">
+	<form action="loginR"  method = "POST">
 		<fieldset>
 			<table>
 				<tr>
@@ -64,13 +69,35 @@
 				</tr>
 			</table>
 			
-			<input type = "submit" value = "로그인" id = "selectButton"/>
+			
+			
+			<!-- <button id="login-button" class="btn btn-default" type="submit">LOGIN</button> -->
+			<input type = "submit" value = "로그인" id = "selectButton" />
+			
+			
 		</fieldset>
 	</form>
 	</section>
 <%
 	}else{
-		response.sendRedirect("AfterLoginR.html");}
+		response.sendRedirect("AfterLoginR.jsp");}
 %>
+
+
+<!--     <script type="text/javascript">
+    var webSocket = new WebSocket("ws://localhost:8080/linkedData/websocket");
+    var messageTextArea = document.getElementById("messageTextArea");
+
+    function sendMessage(){
+        var message = document.getElementById("Rid");
+        //messageTextArea.value += "Send to Server => "+message.value+"\n";
+        //웹소켓으로 textMessage객체의 값을 보낸다.
+        webSocket.send(message.value);
+        //textMessage객체의 값 초기화
+        message.value = "";
+    }
+	</script> -->
 </body>
+
+
 </html>
