@@ -57,7 +57,7 @@ NECA 승인처 로그인 성공
     </script>
     <!-- <input type="submit" value="send" onclick="send()" /> -->
  
-<a href = "DataRequestForm.jsp">데이터 요청</a>
+<a href = "DataSend.jsp">데이터 요청</a>
 
 
 </body>
