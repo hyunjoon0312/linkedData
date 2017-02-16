@@ -9,7 +9,7 @@
 	//업로드 파일이 저장되는 실제 물리적인 경로
 	String uploadPath = request.getRealPath("/upload");
 
-	int size = 500 * 1024 * 1024; // 업로드파일 최대용량 500M
+	int size = 1024 * 1024 * 1024; // 업로드파일 최대용량 1G
 	String id = "";
 	String name = "";
 	String subject = "";
@@ -66,12 +66,13 @@
 		System.out.println("UploadDB connect success");
 		
 		
-	String sql = "insert into uploadfile values(default,?,?,?,?)";        // sql 쿼리
+	String sql = "insert into uploadfile values(default,?,?,?,?,?)";        // sql 쿼리
 	pstmt = con.prepareStatement(sql);                          // prepareStatement에서 해당 sql을 미리 컴파일한다.
-	pstmt.setString(1,filepath);
-	pstmt.setInt(2,filesize);
-	pstmt.setString(3,id);
-	pstmt.setString(4,name);
+	pstmt.setString(1,subject);
+	pstmt.setString(2,filepath);
+	pstmt.setInt(3,filesize);
+	pstmt.setString(4,id);
+	pstmt.setString(5,name);
 	
 	//pstmt.setTimestamp(4, new Timestamp(System.currentTimeMillis()));    // 현재 날짜와 시간
 
