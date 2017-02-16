@@ -19,6 +19,10 @@
 	String origfilename = "";
 	int filesize=0;
 	String filepath="";
+	String nhis = "";
+	String stat = "";
+
+	
 
 	try {
 		//request 객체가 가지고 있는 값을 변화해서 접근해야 한다.
@@ -29,7 +33,10 @@
 		id = multi.getParameter("id");
 		name = multi.getParameter("name");
 		subject = multi.getParameter("subject");
-
+		
+		// checkbox에서 데이터 받아옴
+		nhis = multi.getParameter("nhis") == null ? "0" : multi.getParameter("nhis");;
+		stat = multi.getParameter("stat") == null ? "0" : multi.getParameter("stat");;
 		
 		// 업로드 성공한 파일 상세정보
 		
@@ -50,6 +57,8 @@
 		filepath = (String)fileinfo.getPath();	//파일 경로 + 파일명
 		
 		
+
+		
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
@@ -69,14 +78,28 @@
 				"hyunjoon");
 		System.out.println("UploadDB connect success");
 		
+
 		
-	String infosql = "insert into UploadFileInfo values(default,?,?,?,?,?)";        // sql 쿼리
+		
+	int IntNhis;
+	int IntStat;
+	
+
+	//checkbox에서 받아온 데이터 int형으로 캐스팅
+	IntNhis = Integer.parseInt(nhis);
+	IntStat = Integer.parseInt(stat);
+
+	String infosql = "insert into UploadFileInfo values(default,?,?,?,?,?,?,?,?)";        // sql 쿼리
 	pstmt1 = con.prepareStatement(infosql);                          // prepareStatement에서 해당 sql을 미리 컴파일한다.
 	pstmt1.setString(1,subject);
-	pstmt1.setString(2,filepath);
-	pstmt1.setInt(3,filesize);
-	pstmt1.setString(4,id);
-	pstmt1.setString(5,name);
+	pstmt1.setString(2,filename);
+	pstmt1.setString(3,filepath);
+	pstmt1.setInt(4,filesize);
+	pstmt1.setString(5,id);
+	pstmt1.setString(6,name);
+	pstmt1.setInt(7, IntNhis);
+	pstmt1.setInt(8, IntStat);
+	
 	
 	//pstmt.setTimestamp(4, new Timestamp(System.currentTimeMillis()));    // 현재 날짜와 시간
 
