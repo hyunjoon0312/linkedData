@@ -17,7 +17,7 @@
 <body>
 
 연구자 로그인 성공
-
+<a href = "sessionLogoutNHIS.jsp">로그아웃</a>
       <script type="text/javascript">  
     var ws = new WebSocket("ws://210.115.182.222:8080/linkedData/websocket");
 	

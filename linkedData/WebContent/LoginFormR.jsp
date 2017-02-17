@@ -41,7 +41,7 @@
 
 <% 
 	MemberR Rid = ((MemberR)session.getAttribute("Rid"));
-	String seRid = (String)session.getAttribute("Rid");
+	//String seRid = (String)session.getAttribute("Rid");
 
 
 	if(Rid == null){

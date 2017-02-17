@@ -38,7 +38,7 @@
 <body>
 <% 
 	MemberNHIS NHISid = ((MemberNHIS)session.getAttribute("NHISid"));
-	String seNHISid = (String)session.getAttribute("NHISid");
+	//String seNHISid = (String)session.getAttribute("NHISid");
 
 
 	if(NHISid == null){

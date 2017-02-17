@@ -2,7 +2,9 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Writer;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jdk.nashorn.internal.ir.RuntimeNode.Request;
 import svc.LoginServiceR;
 import vo.MemberR;
 
@@ -39,14 +42,18 @@ public class LoginServletR extends HttpServlet {
 		MemberR loginMemberR = loginServiceR.getLoginMember(Rid,Rpasswd);
 		//로그인이 성공되면 Member 객체가 넘어오고 실패하면 null이 넘어옴
 		
+		
+		
 		if(loginMemberR != null){
 			HttpSession session = request.getSession();
 			session.setAttribute("Rid",  loginMemberR);
-			response.sendRedirect("AfterLoginR.jsp");
 			System.out.println("로그인성공");
+			//response.sendRedirect("AfterLoginR.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("AfterLoginR.jsp");
+			rd.forward(request, response);
 			
-			
-
+			//RequestDispatcher를 통해서 로그인 상태 알림페이지를 거치고 다시 <jsp:forward page="이동할 페이지"/>; 를 통해 로그인 후 페이지로 이동한다.
+			//pageContext.forward("이동할페이지"); 는 무엇인지 알아보기
 			
 		}else{
 			response.setCharacterEncoding("UTF-8");

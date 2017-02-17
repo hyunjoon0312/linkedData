@@ -38,7 +38,7 @@
 <body>
 <% 
 	MemberIN INid = ((MemberIN)session.getAttribute("INid"));
-	String seINid = (String)session.getAttribute("INid");
+	//String seINid = (String)session.getAttribute("INid");
 
 
 	if(INid == null){

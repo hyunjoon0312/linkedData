@@ -3,7 +3,13 @@
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@ page import="java.io.File" %>  
 <%@ page import="java.util.*"%>
-<%@ page import = "java.sql.*" %> 
+<%@ page import = "java.sql.*" %>
+<%@ page import = "svc.CSVRead" %> 
+
+<%!
+CSVRead csvRead = new CSVRead();
+ArrayList<String> readList = new ArrayList<String>();
+%>
 
 <%
 
@@ -116,7 +122,7 @@
 	sqlFilename = sqlFilename.replace(".csv", "");
 	
 	
-	String cTableSql = "create table uploadFile."+name+"_"+sqlFilename+"(personID varchar(255), primary key(personID))";
+	String cTableSql = "create table uploadFile."+name+"_"+sqlFilename+"(linkID int(20) NOT NULL AUTO_INCREMENT, personID varchar(255), primary key(linkID))";
 	pstmt2 = con.prepareStatement(cTableSql);                          // prepareStatement에서 해당 sql을 미리 컴파일한다.
 
 	
@@ -126,14 +132,21 @@
 
 	
 	
-	//-------------------------------- 위에서 생성된 테이블에 데이터 저장 --------------------------------------------
+	//-------------------------------- 위에서 생성된 테이블에 데이터 저장 + 연결번호 --------------------------------------------
 	
 	
-	String inputSql = "LOAD DATA LOCAL INFILE ? INTO TABLE uploadFile."+name+"_"+sqlFilename+" FIELDS TERMINATED BY ','";
-	pstmt3 = con.prepareStatement(inputSql);
-	pstmt3.setString(1, filepath);
+	readList = csvRead.readCSV();
 	
-	pstmt3.executeUpdate();
+	for(int i=0 ; i<readList.size(); i++){
+		
+		String inputSql = "INSERT INTO uploadFile."+name+"_"+sqlFilename+" Values(default, ?)";	
+		//String inputSql = "LOAD DATA LOCAL INFILE ? INTO TABLE uploadFile."+name+"_"+sqlFilename+" FIELDS TERMINATED BY ','";
+		pstmt3 = con.prepareStatement(inputSql);
+		pstmt3.setString(1, readList.get(i));
+		pstmt3.executeUpdate();
+	}
+	
+	
 	
 	System.out.println(filepath+"파일 입력완료");
 	

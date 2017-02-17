@@ -17,7 +17,7 @@
 <body>
 
 데이터 연계 플랫폼 로그인 성공
-
+<a href = "sessionLogoutLINK.jsp">로그아웃</a>
       <script type="text/javascript">  
     var ws = new WebSocket("ws://210.115.182.222:8080/linkedData/websocket");
 	

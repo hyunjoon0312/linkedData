@@ -40,7 +40,7 @@
 
 <% 
 	MemberNEOK NEOKid = ((MemberNEOK)session.getAttribute("NEOKid"));
-	String seNEOKid = (String)session.getAttribute("NEOKid");
+	//String seNEOKid = (String)session.getAttribute("NEOKid");
 
 	if(NEOKid == null){
 %>

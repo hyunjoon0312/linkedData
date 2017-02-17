@@ -38,7 +38,7 @@
 <body>
 <% 
 	MemberLINK LINKid = ((MemberLINK)session.getAttribute("LINKid"));
-	String seLINKid = (String)session.getAttribute("LINKid");
+	//String seLINKid = (String)session.getAttribute("LINKid");
 
 
 	if(LINKid == null){
