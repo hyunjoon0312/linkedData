@@ -77,7 +77,7 @@
 	</section>
 <%
 	}else{
-		response.sendRedirect("AfterLoginR.jsp");}
+		response.sendRedirect("/linkedData/J_R/AfterLoginR.jsp");}
 %>
 
 

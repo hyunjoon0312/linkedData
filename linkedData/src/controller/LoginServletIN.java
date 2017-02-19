@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +17,7 @@ import vo.MemberIN;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/loginIN")
+@WebServlet("/J_IN/loginIN")
 public class LoginServletIN extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,7 +43,9 @@ public class LoginServletIN extends HttpServlet {
 		if(loginMemberIN != null){
 			HttpSession session = request.getSession();
 			session.setAttribute("INid", loginMemberIN);
-			response.sendRedirect("AfterLoginIN.jsp");
+//			response.sendRedirect("AfterLoginIN.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/J_IN/LoginStatusIN.jsp");
+			rd.forward(request, response);
 			System.out.println("로그인 성공");
 		}else{
 			response.setCharacterEncoding("UTF-8");
@@ -51,7 +54,7 @@ public class LoginServletIN extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('로그인 실패');");
-			out.println("location.replace('LoginFormIN.jsp')");
+			out.println("location.replace('/linkedData/J_IN/LoginFormIN.jsp')");
 			out.println("</script>");
 			out.close();
 			System.out.println("로그인 실패");

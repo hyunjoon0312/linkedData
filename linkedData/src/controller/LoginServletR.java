@@ -19,7 +19,7 @@ import vo.MemberR;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/loginR")
+@WebServlet("/J_R/loginR")
 public class LoginServletR extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -49,10 +49,12 @@ public class LoginServletR extends HttpServlet {
 			session.setAttribute("Rid",  loginMemberR);
 			System.out.println("로그인성공");
 			//response.sendRedirect("AfterLoginR.jsp");
-			RequestDispatcher rd = request.getRequestDispatcher("AfterLoginR.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/J_R/LoginStatusR.jsp");
 			rd.forward(request, response);
 			
 			//RequestDispatcher를 통해서 로그인 상태 알림페이지를 거치고 다시 <jsp:forward page="이동할 페이지"/>; 를 통해 로그인 후 페이지로 이동한다.
+			//위 방법은 페이지가 열리지 않아 사용 불가능.. 야매로 똑같은 페이지를 두개 만들고 처음 로그인시의 페이지에는 로그인 상태 알림을 날리는 소스를 넣어놓고 
+			// 그 이후에 세션이 유지될시 자동으로 이동되는 페이지에는 로그인 상태 알림을 날리는 소스를 넣지 않는다.
 			//pageContext.forward("이동할페이지"); 는 무엇인지 알아보기
 			
 		}else{
@@ -62,7 +64,7 @@ public class LoginServletR extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('로그인 실패');");
-			out.println("location.replace('LoginFormR.jsp')");
+			out.println("location.replace('/linkedData/J_R/LoginFormR.jsp')");
 			out.println("</script>");
 			out.close();
 			System.out.println("로그인 실패");

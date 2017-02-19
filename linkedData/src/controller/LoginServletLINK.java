@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +17,7 @@ import vo.MemberLINK;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/loginLINK")
+@WebServlet("/J_LINK/loginLINK")
 public class LoginServletLINK extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,7 +43,9 @@ public class LoginServletLINK extends HttpServlet {
 		if(loginMemberLINK != null){
 			HttpSession session = request.getSession();
 			session.setAttribute("LINKid", loginMemberLINK);
-			response.sendRedirect("AfterLoginLINK.jsp");
+//			response.sendRedirect("/J_IN/LoginStatusLINK.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/J_LINK/LoginStatusLINK.jsp");
+			rd.forward(request, response);
 			System.out.println("로그인성공");
 		}else{
 			response.setCharacterEncoding("UTF-8");
@@ -51,7 +54,7 @@ public class LoginServletLINK extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('로그인 실패');");
-			out.println("location.replace('LoginFormLINK.jsp')");
+			out.println("location.replace('/linkedData/J_LINK/LoginFormLINK.jsp')");
 			out.println("</script>");
 			out.close();
 			System.out.println("로그인 실패");

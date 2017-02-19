@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +17,7 @@ import vo.MemberNHIS;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/loginNHIS")
+@WebServlet("/J_NHIS/loginNHIS")
 public class LoginServletNHIS extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,7 +43,9 @@ public class LoginServletNHIS extends HttpServlet {
 		if(loginMemberNHIS != null){
 			HttpSession session = request.getSession();
 			session.setAttribute("NHISid",  loginMemberNHIS);
-			response.sendRedirect("AfterLoginNHIS.jsp");
+//			response.sendRedirect("/J_NHIS/LoginStatusNHIS.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/J_NHIS/LoginStatusNHIS.jsp");
+			rd.forward(request, response);
 			System.out.println("로그인성공");
 		}else{
 			response.setCharacterEncoding("UTF-8");
@@ -51,7 +54,7 @@ public class LoginServletNHIS extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('로그인 실패');");
-			out.println("location.replace('LoginFormNHIS.jsp')");
+			out.println("location.replace('/linkedData/J_NHIS/LoginFormNHIS.jsp')");
 			out.println("</script>");
 			out.close();
 			System.out.println("로그인 실패");

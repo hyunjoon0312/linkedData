@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +17,7 @@ import vo.MemberNEOK;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/loginNEOK")
+@WebServlet("/J_NEOK/loginNEOK")
 public class LoginServletNEOK extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,7 +43,9 @@ public class LoginServletNEOK extends HttpServlet {
 		if(loginMemberNEOK != null){
 			HttpSession session = request.getSession();
 			session.setAttribute("NEOKid", loginMemberNEOK);
-			response.sendRedirect("AfterLoginNEOK.jsp");
+//			response.sendRedirect("/J_NEOK/LoginStatusNEOK.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/J_NEOK/LoginStatusNEOK.jsp");
+			rd.forward(request, response);
 			System.out.println("로그인 성공");
 		}else{
 			response.setCharacterEncoding("UTF-8");
@@ -51,7 +54,7 @@ public class LoginServletNEOK extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('로그인 실패');");
-			out.println("location.replace('LoginFormNEOK.jsp')");
+			out.println("location.replace('/linkedData/J_NEOK/LoginFormNEOK.jsp')");
 			out.println("</script>");
 			out.close();
 			System.out.println("로그인 실패");

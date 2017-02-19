@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +17,7 @@ import vo.MemberSTAT;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/loginSTAT")
+@WebServlet("/J_STAT/loginSTAT")
 public class LoginServletSTAT extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,7 +43,9 @@ public class LoginServletSTAT extends HttpServlet {
 		if(loginMemberSTAT != null){
 			HttpSession session = request.getSession();
 			session.setAttribute("STATid",  loginMemberSTAT);
-			response.sendRedirect("AfterLoginSTAT.jsp");
+//			response.sendRedirect("/J_STAT/LoginStatusSTAT.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/J_STAT/LoginStatusSTAT.jsp");
+			rd.forward(request, response);
 			System.out.println("로그인성공");
 		}else{
 			response.setCharacterEncoding("UTF-8");
@@ -51,7 +54,7 @@ public class LoginServletSTAT extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('로그인 실패');");
-			out.println("location.replace('LoginFormSTAT.jsp')");
+			out.println("location.replace('/linkedData/J_STAT/LoginFormSTAT.jsp')");
 			out.println("</script>");
 			out.close();
 			System.out.println("로그인 실패");

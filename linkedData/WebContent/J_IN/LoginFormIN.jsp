@@ -72,7 +72,7 @@
 	</section>
 <%
 	}else{
-		response.sendRedirect("AfterLoginIN.jsp");}
+		response.sendRedirect("/linkedData/J_IN/AfterLoginIN.jsp");}
 %>
 </body>
 </html>

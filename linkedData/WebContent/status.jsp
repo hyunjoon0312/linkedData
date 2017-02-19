@@ -21,7 +21,7 @@
     <textarea id="messageTextArea" rows="10" cols="50"></textarea>
      
     <script type="text/javascript">  
-    var ws = new WebSocket("ws://210.115.182.222:8080/linkedData/websocket");
+    var ws = new WebSocket("ws://localhost:8080/linkedData/websocket");
 	
        if ("WebSocket" in window)
        {
