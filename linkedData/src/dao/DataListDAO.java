@@ -1,52 +1,57 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 
+import org.apache.jasper.tagplugins.jstl.core.Catch;
+
+import db.JdbcUtilUpload;
+import jdk.nashorn.internal.scripts.JD;
 import vo.MemberList;
 
 public class DataListDAO {
 
-	public MemberList getMemberList(){
-		MemberList memberList = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+	private Connection con;
+	private PreparedStatement pstmt;
+	private ResultSet rs;
 
-
-		try{
-			
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://112.72.158.187:3306/uploadFile", "hyunjoon",
-					"hyunjoon");
-			System.out.println("UploadDB connect success");
-			
-			
-			pstmt = con.prepareStatement("SELECT uploadtime, subject, filename, uploaderid, uploadername, nhis, stat FROM UploadFileInfo");
-			rs = pstmt.executeQuery();
-			if(rs.next()){
-				memberList = new MemberList();
-				memberList.setUploadtime(rs.getString("uploadtime"));
-				memberList.setSubject(rs.getString("subject"));
-				memberList.setFilename(rs.getString("filename"));
-				memberList.setUploaderid(rs.getString("uploaderid"));
-				memberList.setUploadername(rs.getString("uploadername"));
-				memberList.setNhis(rs.getInt("nhis"));
-				memberList.setStat(rs.getInt("stat"));
-			}
-			
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			if(pstmt != null) try{pstmt.close();}catch(SQLException sqle){}            // PreparedStatement 객체 해제
-			if(con != null) try{con.close();}catch(SQLException sqle){}            // PreparedStatement 객체 해제
-			if(rs != null) try{rs.close();}catch(SQLException sqle){}            // PreparedStatement 객체 해제
-			
-		}
-		return memberList;
+	public DataListDAO() {
 	}
+
+	public ArrayList<MemberList> getListAll(){
+	
+	ArrayList<MemberList> list = new ArrayList<MemberList>();
+	
+	try{
+		con = JdbcUtilUpload.getUploadConnection();
+		String sql = "Select * from uploadFile.UploadFileInfo";
+		pstmt = con.prepareStatement(sql);
+		rs = pstmt.executeQuery();
+		while(rs.next()){
+			Timestamp time = rs.getTimestamp(1);
+			String subject = rs.getString(2);
+			String filename = rs.getString(3);
+			String uploaderid = rs.getString(6);
+			String uploadername = rs.getString(7);
+			int nhis = rs.getInt(8);
+			int stat = rs.getInt(9);
+			MemberList member = new MemberList(time, subject, filename, uploaderid, uploadername, nhis, stat);
+			list.add(member);
+		}
+		
+	}catch (SQLException e) {
+		// TODO: handle exception
+		e.printStackTrace();
+	}finally {
+		if(rs!=null){JdbcUtilUpload.close(rs);}
+		if(pstmt != null){JdbcUtilUpload.close(pstmt);}
+		if(con != null){JdbcUtilUpload.close(con);}
+	}
+	return list;
+	}
+
 }

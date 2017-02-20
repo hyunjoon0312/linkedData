@@ -1,14 +1,23 @@
 package vo;
 
+import java.sql.Timestamp;
+
 public class MemberUpload {
 	
+	private Timestamp uploadtime;
 	private String filename;
 	private int	filesize;
 	private String uploaderid;
 	private String uploadername;
 	
 	
+	public Timestamp getUploadtime(){
+		return uploadtime;
+	}
 	
+	public void setUploadtime(Timestamp uploadtime) {
+		this.uploadtime = uploadtime;
+	}
 	public String getFilename() {
 		return filename;
 	}

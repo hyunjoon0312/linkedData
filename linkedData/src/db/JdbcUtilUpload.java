@@ -2,8 +2,8 @@ package db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 
 //데이터베이스 작업을 할 때 반복적으로 수행해야 하는 작업을 정의하는 클래스
 public class JdbcUtilUpload {
@@ -34,9 +34,9 @@ public class JdbcUtilUpload {
 		}
 	}
 	
-	public static void close(Statement stmt){
+	public static void close(PreparedStatement pstmt){
 		try {
-			stmt.close();
+			pstmt.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

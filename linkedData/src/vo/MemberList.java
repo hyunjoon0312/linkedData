@@ -1,8 +1,10 @@
 package vo;
 
+import java.sql.Timestamp;
+
 public class MemberList {
 
-	private String uploadtime;
+	private Timestamp uploadtime;
 	private String subject;
 	private String filename;
 	private String uploaderid;
@@ -10,11 +12,19 @@ public class MemberList {
 	private int nhis;
 	private int stat;
 	
-	
-	public String getUploadtime() {
+	public MemberList(Timestamp uploadtime, String subject, String filename, String uploaderid, String uploadername, int nhis, int stat){
+		this.uploadtime = uploadtime;
+		this.filename = filename;
+		this.uploaderid = uploaderid;
+		this.uploadername = uploadername;
+		this.nhis = nhis;
+		this.stat = stat;
+	}
+
+	public Timestamp getUploadtime() {
 		return uploadtime;
 	}
-	public void setUploadtime(String uploadtime) {
+	public void setUploadtime(Timestamp uploadtime) {
 		this.uploadtime = uploadtime;
 	}
 	public String getSubject() {
