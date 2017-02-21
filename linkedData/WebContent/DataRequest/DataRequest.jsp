@@ -16,7 +16,9 @@ ArrayList<String> readList = new ArrayList<String>();
 //------------------------------- 파일 업로드 --------------------------------------
 	//업로드 파일이 저장되는 실제 물리적인 경로
 	String uploadPath = request.getRealPath("/upload");
-
+	
+	System.out.println(uploadPath);
+	
 	int size = 1024 * 1024 * 1024; // 업로드파일 최대용량 1G
 	String id = "";
 	String name = "";
@@ -95,7 +97,7 @@ ArrayList<String> readList = new ArrayList<String>();
 	IntNhis = Integer.parseInt(nhis);
 	IntStat = Integer.parseInt(stat);
 
-	String infosql = "insert into UploadFileInfo values(default,?,?,?,?,?,?,?,?)";        // sql 쿼리
+	String infosql = "insert into UploadFileInfo values(default,?,?,?,?,?,?,?,?,?,?)";        // sql 쿼리
 	pstmt1 = con.prepareStatement(infosql);                          // prepareStatement에서 해당 sql을 미리 컴파일한다.
 	pstmt1.setString(1,subject);
 	pstmt1.setString(2,filename);
@@ -105,6 +107,8 @@ ArrayList<String> readList = new ArrayList<String>();
 	pstmt1.setString(6,name);
 	pstmt1.setInt(7, IntNhis);
 	pstmt1.setInt(8, IntStat);
+	pstmt1.setInt(9, 0);
+	pstmt1.setInt(10, 0);
 	
 	
 	//pstmt.setTimestamp(4, new Timestamp(System.currentTimeMillis()));    // 현재 날짜와 시간

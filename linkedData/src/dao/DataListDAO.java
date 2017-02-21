@@ -42,7 +42,7 @@ public class DataListDAO {
 			MemberList member = new MemberList(time, subject, filename, uploaderid, uploadername, nhis, stat);
 			list.add(member);
 		}
-		
+		System.err.println(list.size());
 	}catch (SQLException e) {
 		// TODO: handle exception
 		e.printStackTrace();
@@ -54,4 +54,14 @@ public class DataListDAO {
 	return list;
 	}
 
+		// 이렇게 해서 nhis디비에 저장
+	public static void main(String[] args) {
+		DataListDAO dao = new DataListDAO();
+		ArrayList<MemberList> list = dao.getListAll();
+		System.out.println(list.get(0).getFilename());
+		System.out.println(list.get(1).getFilename());
+		System.out.println(list.get(0).getSubject());
+		
+	}
+	
 }

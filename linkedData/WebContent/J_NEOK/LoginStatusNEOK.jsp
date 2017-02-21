@@ -17,7 +17,7 @@
 </head>
 <body>
 
-NECA 승인처 로그인 성공
+NECA 승인처 로그인 성공<br>
       <script type="text/javascript">  
     var ws = new WebSocket("ws://localhost:8080/linkedData/websocket");
 	
@@ -55,9 +55,8 @@ NECA 승인처 로그인 성공
     }
  
     </script>
-    <!-- <input type="submit" value="send" onclick="send()" /> -->
  
-<a href = "DataSend.jsp">데이터 요청</a>
+<a href = "/linkedData/Datalist.jsp">연계 데이터 요청 목록</a><br>
 <a href = "/linkedData/J_R/sessionLogoutR.jsp">로그아웃</a>
 </body>
 </html>
