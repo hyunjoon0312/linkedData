@@ -17,13 +17,13 @@
 <%
 String filename = request.getParameter("filename");
 String uploadername = request.getParameter("uploadername");
-String str_nhis_send = request.getParameter("nhis_send");
-int nhis_send = Integer.parseInt(str_nhis_send);
+String str_stat_send = request.getParameter("stat_send");
+int stat_send = Integer.parseInt(str_stat_send);
 
-if(nhis_send == 0){
+if(stat_send == 0){
 %>
 
-건강보험공단으로 <%=uploadername %> 연구자가 요청한 데이터 전송 성공<br/>
+통계청으로 <%=uploadername %> 연구자가 요청한 데이터 전송 성공<br/>
 
 <%}else{ %>
 
@@ -50,7 +50,7 @@ if(nhis_send == 0){
           ws.onopen = function()
           {
              // Web Socket is connected, send data using send()
-             ws.send("<%=uploadername%>연구자 <%=filename%>파일 식별자 건강보험공단 전송..."+"\n");
+             ws.send("<%=uploadername%>연구자 <%=filename%>파일 식별자 통계청 전송..."+"\n");
           };
 			
           ws.onmessage = function (evt) 

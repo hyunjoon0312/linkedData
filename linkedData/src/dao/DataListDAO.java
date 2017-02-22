@@ -21,6 +21,8 @@ public class DataListDAO {
 
 	public DataListDAO() {
 	}
+	
+	//데이터 DB에서 리스트 형태로 불러와서 저장.
 
 	public ArrayList<MemberList> getListAll(){
 	
@@ -54,7 +56,7 @@ public class DataListDAO {
 	return list;
 	}
 
-		// 이렇게 해서 nhis디비에 저장
+		// 리스트 형태로 불러온 데이터를 이렇게 출력가능.
 	public static void main(String[] args) {
 		DataListDAO dao = new DataListDAO();
 		ArrayList<MemberList> list = dao.getListAll();

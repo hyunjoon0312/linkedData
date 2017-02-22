@@ -2,11 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -17,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import db.JdbcUtilNHIS;
+import db.JdbcUtilSTAT;
 import db.JdbcUtilUpload;
 import vo.MemberData;
 
@@ -25,14 +22,14 @@ import vo.MemberData;
 /**
  * Servlet implementation class DatasendServlet
  */
-@WebServlet("/datasend_nhis")
-public class DatasendServlet_NHIS extends HttpServlet {
+@WebServlet("/datasend_stat")
+public class DatasendServlet_STAT extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DatasendServlet_NHIS() {
+    public DatasendServlet_STAT() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -53,8 +50,8 @@ public class DatasendServlet_NHIS extends HttpServlet {
 		
 		String filename = request.getParameter("filename");
 		String uploadername = request.getParameter("uploadername");
-		String str_nhis_send = request.getParameter("nhis_send");
-		int nhis_send = Integer.parseInt(str_nhis_send);
+		String str_stat_send = request.getParameter("stat_send");
+		int stat_send = Integer.parseInt(str_stat_send);
 		
 		
 		HttpSession session = request.getSession();
@@ -107,9 +104,9 @@ public class DatasendServlet_NHIS extends HttpServlet {
 		
 		
 		
-		// nhis_send == 0 이면 데이터 읽어와서 nhis 기관 DB에 저장
+		// stat_send == 0 이면 데이터 읽어와서 nhis 기관 DB에 저장
 		
-		if(nhis_send == 0){
+		if(stat_send == 0){
 		
 		try{
 			
@@ -118,7 +115,7 @@ public class DatasendServlet_NHIS extends HttpServlet {
 			System.out.println("(1)UploadDB connect success");
 		
 		
-			String sql = "UPDATE uploadFile.UploadFileInfo set nhis_send = 1 where filename = "+"'"+filename+"'";
+			String sql = "UPDATE uploadFile.UploadFileInfo set stat_send = 1 where filename = "+"'"+filename+"'";
 			
 		
 			pstmt1 = con1.prepareStatement(sql);
@@ -172,8 +169,8 @@ public class DatasendServlet_NHIS extends HttpServlet {
 		
 		
 		try {
-			con3 = JdbcUtilNHIS.getNHISConnection();
-			System.out.println("(1)nhis_send DB connect success");
+			con3 = JdbcUtilSTAT.getSTATConnection();
+			System.out.println("(1)stat_send DB connect success");
 			
 			String sql = "CREATE TABLE "+uploadername+"_"+refilename+" (linkID int(20), personID VARCHAR(20), PRIMARY KEY(linkID))";
 			
@@ -185,8 +182,8 @@ public class DatasendServlet_NHIS extends HttpServlet {
 			// TODO: handle exception
 			e.printStackTrace();
 		}finally {
-			if(con3 != null){JdbcUtilNHIS.close(con3);}
-			if(pstmt3 != null){JdbcUtilNHIS.close(pstmt3);}
+			if(con3 != null){JdbcUtilSTAT.close(con3);}
+			if(pstmt3 != null){JdbcUtilSTAT.close(pstmt3);}
 			
 		}
 		
@@ -194,8 +191,8 @@ public class DatasendServlet_NHIS extends HttpServlet {
 		// 리스트형태로 불러온 데이터 저장
 		
 		try {
-			con4 = JdbcUtilNHIS.getNHISConnection();
-			System.out.println("(2)nhis_send DB connect success");
+			con4 = JdbcUtilSTAT.getSTATConnection();
+			System.out.println("(2)stat_send DB connect success");
 			
 			String sql = "INSERT INTO "+uploadername+"_"+refilename+" Values(?,?)";
 			
@@ -214,15 +211,15 @@ public class DatasendServlet_NHIS extends HttpServlet {
 			// TODO: handle exception
 			e.printStackTrace();
 		}finally {
-			if(con4 != null){JdbcUtilNHIS.close(con4);}
-			if(pstmt4 != null){JdbcUtilNHIS.close(pstmt4);}
+			if(con4 != null){JdbcUtilSTAT.close(con4);}
+			if(pstmt4 != null){JdbcUtilSTAT.close(pstmt4);}
 			
 		}
 		
 		
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("datasend_nhis.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("datasend_stat.jsp");
 		rd.forward(request, response);
 		
 		

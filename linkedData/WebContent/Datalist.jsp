@@ -54,6 +54,7 @@
 					int stat = rs.getInt(9);
 					int nhis_send = rs.getInt(10);
 					int stat_send = rs.getInt(11);
+					System.out.println(nhis_send);
 			%>
 
 			<tr>
