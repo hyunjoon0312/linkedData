@@ -12,7 +12,7 @@
 NECA 승인처 로그인 성공
 
  
-<a href = "/linkedData/Datalist.jsp">연계 데이터 요청 목록</a><br>
+<a href = "/linkedData/DataSend/Datalist.jsp">연계 데이터 요청 목록</a><br>
 <a href = "/linkedData/J_R/sessionLogoutR.jsp">로그아웃</a>
 
 

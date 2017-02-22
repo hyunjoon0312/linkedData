@@ -16,7 +16,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-건강보험공 로그인 성공
+건강보험공단 로그인 성공
 <a href = "sessionLogoutNHIS.jsp">로그아웃</a>
       <script type="text/javascript">  
     var ws = new WebSocket("ws://localhost:8080/linkedData/websocket");
@@ -56,7 +56,7 @@
  
     </script>
     
-    
+<a href = "/linkedData/J_NHIS/">요청 데이터 확인</a>    
 <a href = "/linkedData/J_NHIS/sessionLogoutNHIS.jsp">로그아웃</a>
 </body>
 </html>

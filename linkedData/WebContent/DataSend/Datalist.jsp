@@ -42,6 +42,7 @@
 				<td>연구자 이름</td>
 				<th>건강보험공단</th>
 				<th>통계청</th>
+				<th>데이터 전송 여부</th>
 			</tr>
 			<%
 				while (rs.next()) { //rs 를 통해 테이블 객체들의 필드값을 넘겨볼 수 있다.
@@ -54,6 +55,7 @@
 					int stat = rs.getInt(9);
 					int nhis_send = rs.getInt(10);
 					int stat_send = rs.getInt(11);
+					int send_ok = rs.getInt(12);
 					System.out.println(nhis_send);
 			%>
 
@@ -87,17 +89,32 @@
 				<%}else{ %>
 				<td><input type="submit" value="연계 미신청" disabled="disabled"/></td><%} %>
 				</form>
-			</tr>
 			<%
+				if(send_ok == 1){
+			%>
+			<td>모든 기관 전송 완료</td>
+			<%} else if(nhis_send == 1 && stat_send == 0){%>
+			<td>통계청 전송 필요</td>
+			<%}else if(nhis_send == 0 && stat_send == 1){ 
+			%>
+			<td>건강보험공단 전송 필요</td>
+			<%}else{ %>
+			<td>모든 기관 전송 필요</td>
+			<%}
 				} // end while
 			%>
+			
+			
+			</tr>
 		</table>
 	<%
-		rs.close(); // ResultSet exit
-			stmt.close(); // Statement exit
-			conn.close(); // Connection exit
+		
 		} catch (Exception e) {
 			out.println("err:" + e.toString());
+		}finally{
+			if(rs != null){rs.close();} // ResultSet exit
+			if(stmt != null){stmt.close();} // Statement exit
+			if(conn != null){conn.close();} // Connection exit
 		}
 	%>
 

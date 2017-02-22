@@ -17,12 +17,13 @@ import javax.servlet.http.HttpSession;
 import db.JdbcUtilSTAT;
 import db.JdbcUtilUpload;
 import vo.MemberData;
+import vo.MemberSend;
 
 
 /**
  * Servlet implementation class DatasendServlet
  */
-@WebServlet("/datasend_stat")
+@WebServlet("/DataSend/datasend_stat")
 public class DatasendServlet_STAT extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -54,6 +55,9 @@ public class DatasendServlet_STAT extends HttpServlet {
 		int stat_send = Integer.parseInt(str_stat_send);
 		
 		
+		MemberSend memberSend = null;
+		
+		
 		HttpSession session = request.getSession();
 		session.setAttribute("filename", filename);
 		session.setAttribute("uploadername", uploadername);
@@ -65,11 +69,18 @@ public class DatasendServlet_STAT extends HttpServlet {
 		Connection con2 = null;
 		Connection con3 = null;
 		Connection con4 = null;
+		Connection con5 = null;
+		Connection con6 = null;
+		Connection con7 = null;
 		PreparedStatement pstmt1 = null;
 		PreparedStatement pstmt2 = null;
 		PreparedStatement pstmt3 = null;
 		PreparedStatement pstmt4 = null;
-		ResultSet rs = null;
+		PreparedStatement pstmt5 = null;
+		PreparedStatement pstmt6 = null;
+		PreparedStatement pstmt7 = null;
+		ResultSet rs1 = null;
+		ResultSet rs2 = null;
 		
 		/*try{
 			
@@ -80,12 +91,12 @@ public class DatasendServlet_STAT extends HttpServlet {
 		
 			stmt = con.createStatement();
 			
-			String sql = "SELECT nhis_send FROM uploadFile.UploadFileInfo where filename = "+filename;
+			String sql = "SELECT stat_send FROM uploadFile.UploadFileInfo where filename = "+filename;
 		
 			rs = stmt.executeQuery(sql);
 		
 			while(rs.next()){
-				nhis_send = rs.getInt("nhis_send");
+				stat_send = rs.getInt("stat_send");
 			}
 		
 		}catch(Exception e){
@@ -120,13 +131,13 @@ public class DatasendServlet_STAT extends HttpServlet {
 		
 			pstmt1 = con1.prepareStatement(sql);
 			pstmt1.executeUpdate();
-			System.out.println("nhis_send 1로 변경");
+			System.out.println("stat_send 1로 변경");
 		
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			JdbcUtilUpload.close(con1);
-			JdbcUtilUpload.close(pstmt1);
+			if(con1 != null){JdbcUtilUpload.close(con1);}
+			if(pstmt1 != null){JdbcUtilUpload.close(pstmt1);}
 		}
 		
 		// ArrayList 만들어서 데이터 리스트형태로 저장
@@ -144,12 +155,16 @@ public class DatasendServlet_STAT extends HttpServlet {
 			String sql = "SELECT * FROM uploadFile."+uploadername+"_"+refilename;
 			
 			pstmt2 = con2.prepareStatement(sql);
-			rs = pstmt2.executeQuery();
+			rs1 = pstmt2.executeQuery();
 			
-			while(rs.next()){
-				int linkID = rs.getInt(1);
-				String personID = rs.getString(2);
-				MemberData memberData = new MemberData(linkID, personID);
+			while(rs1.next()){
+				//나중에 내 방식대로 할때 필요한 코드
+				/*int linkID = rs.getInt(1);
+				String personID = rs.getString(2);*/
+				
+				String personID = rs1.getString(1);
+				//MemberData memberData = new MemberData(linkID, personID);
+				MemberData memberData = new MemberData(personID);
 				list.add(memberData);
 			}
 			listsize = list.size();
@@ -159,7 +174,7 @@ public class DatasendServlet_STAT extends HttpServlet {
 			// TODO: handle exception
 			e.printStackTrace();
 		}finally {
-			if(rs !=null){JdbcUtilUpload.close(rs);}
+			if(rs1 !=null){JdbcUtilUpload.close(rs1);}
 			if(con2 != null){JdbcUtilUpload.close(con2);}
 			if(pstmt2 != null){JdbcUtilUpload.close(pstmt2);}
 		}
@@ -172,7 +187,9 @@ public class DatasendServlet_STAT extends HttpServlet {
 			con3 = JdbcUtilSTAT.getSTATConnection();
 			System.out.println("(1)stat_send DB connect success");
 			
-			String sql = "CREATE TABLE "+uploadername+"_"+refilename+" (linkID int(20), personID VARCHAR(20), PRIMARY KEY(linkID))";
+			//나중에 내 방식대로 할 때 필요한 쿼리
+			//String sql = "CREATE TABLE "+uploadername+"_"+refilename+" (linkID int(20), personID VARCHAR(20), PRIMARY KEY(linkID))";
+			String sql = "CREATE TABLE "+uploadername+"_"+refilename+" (personID VARCHAR(20), PRIMARY KEY(personID))";
 			
 			pstmt3 = con3.prepareStatement(sql);
 			pstmt3.executeUpdate();
@@ -194,14 +211,25 @@ public class DatasendServlet_STAT extends HttpServlet {
 			con4 = JdbcUtilSTAT.getSTATConnection();
 			System.out.println("(2)stat_send DB connect success");
 			
-			String sql = "INSERT INTO "+uploadername+"_"+refilename+" Values(?,?)";
+			//나중에 내방식대로 할때 필요한 코드
+			//String sql = "INSERT INTO "+uploadername+"_"+refilename+" Values(?,?)";
+			String sql = "INSERT INTO "+uploadername+"_"+refilename+" Values(?)";
 			
 			pstmt4 = con4.prepareStatement(sql);
 			
-				for(int i =0;i<listsize;i++){
-				pstmt4.setInt(1, list.get(i).getLinkID());
-				pstmt4.setString(2, list.get(i).getPersonID());
+			for(int i =0;i<listsize;i++){
+				
+				
+				pstmt4.setString(1, list.get(i).getPersonID());
 				pstmt4.addBatch();
+			
+			
+			//나중에 내 방식대로 할때 필요한 코드
+			/*	pstmt4.setInt(1, list.get(i).getLinkID());
+				pstmt4.setString(2, list.get(i).getPersonID());
+				pstmt4.addBatch();*/
+				
+				
 			}
 			
 			int[] cnt = pstmt4.executeBatch();
@@ -219,7 +247,98 @@ public class DatasendServlet_STAT extends HttpServlet {
 		
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("datasend_stat.jsp");
+		
+		//-------- 각 기관에 데이터 전송하였는지 여부 확인 -----------------------
+		
+		try {
+			con5 = JdbcUtilUpload.getUploadConnection();
+			System.out.println("(3)UploadDB connect success");	
+			
+			
+			
+			String sql = "SELECT nhis_send, stat_send FROM uploadFile.UploadFileInfo where filename = "+"'"+filename+"'";
+			
+			
+			pstmt5 = con5.prepareStatement(sql);
+			rs2 = pstmt5.executeQuery();
+			
+			while(rs2.next()){
+				memberSend = new MemberSend();
+				memberSend.setNhis_send(rs2.getInt(1)); 
+				memberSend.setStat_send(rs2.getInt(2));
+	
+			}
+		
+			System.out.println(filename+" 데이터 기관 전송 여부 확인");
+			
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			if(rs2 !=null){JdbcUtilUpload.close(rs2);}
+			if(con5 != null){JdbcUtilUpload.close(con5);}
+			if(pstmt5 != null){JdbcUtilUpload.close(pstmt5);}
+		}
+		
+
+		//----------- 각 기관에 데이터 전송 여부에 따른 진행 ----------
+		
+		if(memberSend.getNhis_send() == 1 && memberSend.getStat_send() == 1){
+			
+			try{
+				
+				con6 = JdbcUtilUpload.getUploadConnection();
+						
+				System.out.println("(4)UploadDB connect success");
+			
+			
+				String sql = "UPDATE uploadFile.UploadFileInfo set send_ok = 1 where filename = "+"'"+filename+"'";
+				
+			
+				pstmt6 = con6.prepareStatement(sql);
+				pstmt6.executeUpdate();
+				System.out.println("send_ok 1로 변경");
+			
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally{
+				if(con6 != null){JdbcUtilUpload.close(con6);}
+				if(pstmt6 != null){JdbcUtilUpload.close(pstmt6);}
+			}
+			
+			
+			
+			
+			try{
+				
+				con7 = JdbcUtilUpload.getUploadConnection();
+						
+				System.out.println("(5)UploadDB connect success");
+			
+			
+				String sql = "DROP TABLE uploadFile."+uploadername+"_"+refilename;
+				
+			
+				pstmt7 = con7.prepareStatement(sql);
+				pstmt7.executeUpdate();
+				System.out.println(uploadername+"_"+refilename+" 테이블 삭제");
+			
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally{
+				if(con7 != null){JdbcUtilUpload.close(con7);}
+				if(pstmt7 != null){JdbcUtilUpload.close(pstmt7);}
+			}
+			
+			
+			
+			
+		}
+		
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/DataSend/datasend_stat.jsp");
 		rd.forward(request, response);
 		
 		
