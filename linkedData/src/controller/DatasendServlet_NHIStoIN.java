@@ -18,6 +18,7 @@ import db.JdbcUtil;
 import db.JdbcUtilNHIS;
 import db.JdbcUtilUpload;
 import vo.MemberData;
+import vo.MemberKEY_NHIS;
 import vo.MemberSend;
 
 
@@ -107,7 +108,7 @@ public class DatasendServlet_NHIStoIN extends HttpServlet {
 		
 		// ArrayList 만들어서 데이터 리스트형태로 저장
 		
-/*		ArrayList<MemberData> list = new ArrayList<MemberData>();
+		ArrayList<MemberKEY_NHIS> list = new ArrayList<MemberKEY_NHIS>();
 		int listsize = 0;
 		
 		
@@ -117,19 +118,20 @@ public class DatasendServlet_NHIStoIN extends HttpServlet {
 			
 			
 			
-			String sql = "SELECT * FROM nhis_take_data."+tableName;
+			String sql = "SELECT nhis.nhis_data.PERSON_ID, nhis.nhis_data.nhis_ID FROM nhis.nhis_data INNER JOIN nhis_take_data."+tableName+" ON nhis.nhis_data.PERSON_ID = nhis_take_data."+tableName+".personID";
 			
 			pstmt2 = con2.prepareStatement(sql);
 			rs1 = pstmt2.executeQuery();
 			
 			while(rs1.next()){
 
-				String personID = rs1.getString(1);
-				MemberData memberData = new MemberData(personID);
-				list.add(memberData);
+				String person_id = rs1.getString(1);
+				String nhis_id = rs1.getString(2);
+				MemberKEY_NHIS memberKEY_NHIS = new MemberKEY_NHIS(person_id, nhis_id);
+				list.add(memberKEY_NHIS);
 			}
 			listsize = list.size();
-			System.out.println(tableName+" 데이터 리스트로 불러옴");
+			System.out.println(tableName+"식별자와 해당 NHIS 식별자 리스트로 불러옴");
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -139,10 +141,10 @@ public class DatasendServlet_NHIStoIN extends HttpServlet {
 			if(pstmt2 != null){JdbcUtil.close(pstmt2);}
 		}
 		
-		
+// ------------------------ 여기부터 내일 ----------------		
 		// 리스트형태로 불러온 데이터 저장할 테이블 생성
 		
-		
+		/*
 		try {
 			con3 = JdbcUtil.getConnection();
 			System.out.println("(1)NECA INDEXER DB connect success");
@@ -291,9 +293,9 @@ public class DatasendServlet_NHIStoIN extends HttpServlet {
 			}
 			
 			
-		*/	
+			
 
-		
+		*/
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/DataSend/datasend_nhis.jsp");
