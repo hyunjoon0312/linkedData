@@ -103,10 +103,8 @@ public class DatasendServlet_NHIStoIN extends HttpServlet {
 			if(con1 != null){JdbcUtil.close(con1);}
 			if(pstmt1 != null){JdbcUtil.close(pstmt1);}
 		}
-//-------------------------------------------여기부터 --------------------------------------------
-		//NHIS DB에서 기관 식별자랑 주민번호 읽어와서 INDEXER DB에 넣어주자.
 		
-		// ArrayList 만들어서 데이터 리스트형태로 저장
+		// ArrayList 만들어서 데이터 리스트형태로 저장 
 		
 		ArrayList<MemberKEY_NHIS> list = new ArrayList<MemberKEY_NHIS>();
 		int listsize = 0;
