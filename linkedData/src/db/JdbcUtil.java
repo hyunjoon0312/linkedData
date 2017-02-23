@@ -6,17 +6,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 //데이터베이스 작업을 할 때 반복적으로 수행해야 하는 작업을 정의하는 클래스
-public class JdbcUtilSTAT {
+public class JdbcUtil {
 	
-	public static Connection getSTATConnection(){
+	public static Connection getConnection(){
 		
 		Connection con =null;
 		
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://112.72.158.187:3306/stat_take_data", "hyunjoon",
+			con = DriverManager.getConnection("jdbc:mysql://112.72.158.187:3306", "hyunjoon",
 					"hyunjoon");
-			System.out.println("stat_link connect success");
+			System.out.println("DataBase connect success");
 		}catch(Exception e){
 			e.printStackTrace();
 		}

@@ -9,9 +9,10 @@
 </head>
 <body>
 
-건강보험공 로그인 성공
+건강보험공 로그인 성공<br>
 
- 
+<a href = "/linkedData/J_NHIS/Datalist_NEOKtoNHIS.jsp">데이터 요청 목록</a>    <br>
+
 <a href = "/linkedData/J_NHIS/sessionLogoutNHIS.jsp">로그아웃</a>
 
 </body>

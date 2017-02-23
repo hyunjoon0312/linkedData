@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+전송완료
 </body>
 </html>

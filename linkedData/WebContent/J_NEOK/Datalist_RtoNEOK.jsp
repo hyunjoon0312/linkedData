@@ -1,3 +1,4 @@
+<%@page import="vo.MemberNEOK"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.sql.Time"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -11,6 +12,7 @@
 
 
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,6 +22,10 @@
 <body>
 
 	<%
+		String NEOKid = ((MemberNEOK)request.getSession().getAttribute("NEOKid")).getNEOKId();
+		String NEOKname = ((MemberNEOK)request.getSession().getAttribute("NEOKid")).getNEOKName();
+
+	
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	
 	
 		Connection conn = JdbcUtilUpload.getUploadConnection();
@@ -35,7 +41,7 @@
 
 		<table border="1" cellspacing="0">
 			<tr>
-				<td>업로드 시간</td>
+				<td>요청 시간</td>
 				<td>제목</td>
 				<td>파일 이름 </td>
 				<td>연구자 ID</td>
@@ -51,6 +57,7 @@
 					String format_time = (String)format.format(date_time);
 					String filename = rs.getString(3);
 					String uploadername = rs.getString(7);
+					String uploaderid = rs.getString(6);
 					int nhis = rs.getInt(8);
 					int stat = rs.getInt(9);
 					int nhis_send = rs.getInt(10);
@@ -63,12 +70,15 @@
 				<td><%=format_time %></td>
 				<td><%=rs.getString(2)%></td>
 				<td><%=filename%></td>
-				<td><%=rs.getString(6)%></td>
+				<td><%=uploaderid%></td>
 				<td><%=uploadername%></td>
 				
 				<form action="datasend_nhis" method="POST">
 				<input type="hidden" name="filename" value="<%=filename %>"/>
 				<input type="hidden" name="uploadername" value="<%=uploadername %>"/>
+				<input type="hidden" name="uploaderid" value="<%=uploaderid %>"/>
+				<input type="hidden" name="NEOKid" value="<%=NEOKid %>"/>
+				<input type="hidden" name="NEOKname" value="<%=NEOKname %>"/>
 				<input type="hidden" name="nhis_send" value="<%=nhis_send %>"/>
 				<input type="hidden" name="stat_send" value="<%=stat_send %>"/>
 				
@@ -81,6 +91,9 @@
 				<form action="datasend_stat" method="POST">
 				<input type="hidden" name="filename" value="<%=filename %>"/>
 				<input type="hidden" name="uploadername" value="<%=uploadername %>"/>
+				<input type="hidden" name="uploaderid" value="<%=uploaderid %>"/>
+				<input type="hidden" name="NEOKid" value="<%=NEOKid %>"/>
+				<input type="hidden" name="NEOKname" value="<%=NEOKname %>"/>
 				<input type="hidden" name="nhis_send" value="<%=nhis_send %>"/>
 				<input type="hidden" name="stat_send" value="<%=stat_send %>"/>
 				

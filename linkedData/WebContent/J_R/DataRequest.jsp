@@ -127,8 +127,8 @@ ArrayList<String> readList = new ArrayList<String>();
 	
 	
 	//나중에 내 방식대로 구현할때 사용할 sql문
-	//String cTableSql = "create table uploadFile."+name+"_"+sqlFilename+"(linkID int(20) NOT NULL AUTO_INCREMENT, personID varchar(255), primary key(linkID))";
-	String cTableSql = "create table uploadFile."+name+"_"+sqlFilename+"(personID varchar(255), primary key(personID))";
+	//String cTableSql = "create table uploadFile."+id+"_"+sqlFilename+"(linkID int(20) NOT NULL AUTO_INCREMENT, personID varchar(255), primary key(linkID))";
+	String cTableSql = "create table uploadFile."+id+"_"+sqlFilename+"(personID varchar(255), primary key(personID))";
 	pstmt2 = con.prepareStatement(cTableSql);                          // prepareStatement에서 해당 sql을 미리 컴파일한다.
 
 	
@@ -149,7 +149,7 @@ ArrayList<String> readList = new ArrayList<String>();
 		//String inputSql = "INSERT INTO uploadFile."+name+"_"+sqlFilename+" Values(default, ?)";	
 		
 		
-		String inputSql = "INSERT INTO uploadFile."+name+"_"+sqlFilename+" Values(?)";	
+		String inputSql = "INSERT INTO uploadFile."+id+"_"+sqlFilename+" Values(?)";	
 		//String inputSql = "LOAD DATA LOCAL INFILE ? INTO TABLE uploadFile."+name+"_"+sqlFilename+" FIELDS TERMINATED BY ','";
 		pstmt3 = con.prepareStatement(inputSql);
 		pstmt3.setString(1, readList.get(i));

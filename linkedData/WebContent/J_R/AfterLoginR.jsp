@@ -12,8 +12,8 @@
 연구자 로그인 성공<br/>
 
  
-<a href = "DataRequestForm.jsp">데이터 요청</a><br/>
-<a href = "sessionLogoutR.jsp">로그아웃</a>
+<a href = "/linkedData/J_R/DataRequestForm.jsp">데이터 요청</a><br/>
+<a href = "/linkedData/J_R/sessionLogoutR.jsp">로그아웃</a>
 
 
 </body>

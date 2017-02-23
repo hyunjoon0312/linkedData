@@ -52,7 +52,7 @@ String Rname = ((MemberR)request.getSession().getAttribute("Rid")).getRName();
 
     </script>
  
-<a href = "/linkedData/DataRequest/DataRequestForm.jsp">데이터 요청</a><br/>
+<a href = "/linkedData/J_R/DataRequestForm.jsp">데이터 요청</a><br/>
 <a href = "/linkedData/J_R/sessionLogoutR.jsp">로그아웃</a>
 </body>
 </html>

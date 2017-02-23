@@ -14,7 +14,7 @@ public class JdbcUtilNHIS {
 		
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://112.72.158.187:3306/nhis_link", "hyunjoon",
+			con = DriverManager.getConnection("jdbc:mysql://112.72.158.187:3306/nhis_take_data", "hyunjoon",
 					"hyunjoon");
 			System.out.println("nhis_link connect success");
 		}catch(Exception e){
