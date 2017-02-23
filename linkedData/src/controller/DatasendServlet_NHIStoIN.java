@@ -2,11 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -17,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import db.JdbcUtil;
 import db.JdbcUtilNHIS;
 import db.JdbcUtilUpload;
 import vo.MemberData;
@@ -52,22 +50,17 @@ public class DatasendServlet_NHIStoIN extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String filename = request.getParameter("filename");
-		String uploadername = request.getParameter("uploadername");
-		String str_nhis_send = request.getParameter("nhis_send");
-		int nhis_send = Integer.parseInt(str_nhis_send);
+		String tableName = request.getParameter("tableName");
+		String str_send_indexer = request.getParameter("send_indexer");
+		int send_indexer = Integer.parseInt(str_send_indexer);
 		
 		
-		MemberSend memberSend = null;
 		
 		
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("filename", filename);
-		session.setAttribute("uploadername", uploadername);
+		session.setAttribute("tableName", tableName);
 
-		String refilename = null;
-		refilename = filename.replace(".csv", "");
 		
 		Connection con1 = null;
 		Connection con2 = null;
@@ -86,112 +79,74 @@ public class DatasendServlet_NHIStoIN extends HttpServlet {
 		ResultSet rs1 = null;
 		ResultSet rs2 = null;
 		
-		/*try{
-			
-			Class.forName("com.mysql.jdbc.Driver");
-			con = JdbcUtilUpload.getUploadConnection();
-					
-			System.out.println("UploadDB connect success");
-		
-			stmt = con.createStatement();
-			
-			String sql = "SELECT nhis_send FROM uploadFile.UploadFileInfo where filename = "+filename;
-		
-			rs = stmt.executeQuery(sql);
-		
-			while(rs.next()){
-				nhis_send = rs.getInt("nhis_send");
-			}
-		
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			JdbcUtilUpload.close(con);
-			
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			JdbcUtilUpload.close(rs);
-		}*/
-		
-		
-		
-		// nhis_send == 0 이면 데이터 읽어와서 nhis 기관 DB에 저장
-		
-		if(nhis_send == 0){
+	
+		if(send_indexer == 0){
 		
 		try{
 			
-			con1 = JdbcUtilUpload.getUploadConnection();
+			con1 = JdbcUtil.getConnection();
 					
-			System.out.println("(1)UploadDB connect success");
+			System.out.println("(1)NHIS DB connect success");
 		
 		
-			String sql = "UPDATE uploadFile.UploadFileInfo set nhis_send = 1 where filename = "+"'"+filename+"'";
+			String sql = "UPDATE nhis_take_data.nhis_take_data_info set send_indexer = 1 where tableName = "+"'"+tableName+"'";
 			
 		
 			pstmt1 = con1.prepareStatement(sql);
 			pstmt1.executeUpdate();
-			System.out.println("nhis_send 1로 변경");
+			System.out.println("send_indexer 1로 변경");
 		
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			if(con1 != null){JdbcUtilUpload.close(con1);}
-			if(pstmt1 != null){JdbcUtilUpload.close(pstmt1);}
+			if(con1 != null){JdbcUtil.close(con1);}
+			if(pstmt1 != null){JdbcUtil.close(pstmt1);}
 		}
+//-------------------------------------------여기부터 --------------------------------------------
+		//NHIS DB에서 기관 식별자랑 주민번호 읽어와서 INDEXER DB에 넣어주자.
 		
 		// ArrayList 만들어서 데이터 리스트형태로 저장
 		
-		ArrayList<MemberData> list = new ArrayList<MemberData>();
+/*		ArrayList<MemberData> list = new ArrayList<MemberData>();
 		int listsize = 0;
 		
 		
 		try {
-			con2 = JdbcUtilUpload.getUploadConnection();
-			System.out.println("(2)UploadDB connect success");	
+			con2 = JdbcUtil.getConnection();
+			System.out.println("(2)NHIS DB connect success");	
 			
 			
 			
-			String sql = "SELECT * FROM uploadFile."+uploadername+"_"+refilename;
+			String sql = "SELECT * FROM nhis_take_data."+tableName;
 			
 			pstmt2 = con2.prepareStatement(sql);
 			rs1 = pstmt2.executeQuery();
 			
 			while(rs1.next()){
-				//나중에 내 방식대로 할때 필요한 코드
-				/*int linkID = rs.getInt(1);
-				String personID = rs.getString(2);*/
-				
+
 				String personID = rs1.getString(1);
-				//MemberData memberData = new MemberData(linkID, personID);
 				MemberData memberData = new MemberData(personID);
 				list.add(memberData);
 			}
 			listsize = list.size();
-			System.err.println(list.size());
-			System.out.println(uploadername+"_"+refilename+" 데이터 리스트로 불러옴");
+			System.out.println(tableName+" 데이터 리스트로 불러옴");
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}finally {
-			if(rs1 !=null){JdbcUtilUpload.close(rs1);}
-			if(con2 != null){JdbcUtilUpload.close(con2);}
-			if(pstmt2 != null){JdbcUtilUpload.close(pstmt2);}
+			if(rs1 !=null){JdbcUtil.close(rs1);}
+			if(con2 != null){JdbcUtil.close(con2);}
+			if(pstmt2 != null){JdbcUtil.close(pstmt2);}
 		}
 		
 		
-		// 리스트형태로 불러온 데이터 저장할 테이블 새성
+		// 리스트형태로 불러온 데이터 저장할 테이블 생성
 		
 		
 		try {
-			con3 = JdbcUtilNHIS.getNHISConnection();
-			System.out.println("(1)nhis_send DB connect success");
+			con3 = JdbcUtil.getConnection();
+			System.out.println("(1)NECA INDEXER DB connect success");
 			
-			//나중에 내 방식대로 할 때 필요한 쿼리
 			//String sql = "CREATE TABLE "+uploadername+"_"+refilename+" (linkID int(20), personID VARCHAR(20), PRIMARY KEY(linkID))";
 			String sql = "CREATE TABLE "+uploadername+"_"+refilename+" (personID VARCHAR(20), PRIMARY KEY(personID))";
 			
@@ -229,9 +184,9 @@ public class DatasendServlet_NHIStoIN extends HttpServlet {
 			
 			
 			//나중에 내 방식대로 할때 필요한 코드
-			/*	pstmt4.setInt(1, list.get(i).getLinkID());
+				pstmt4.setInt(1, list.get(i).getLinkID());
 				pstmt4.setString(2, list.get(i).getPersonID());
-				pstmt4.addBatch();*/
+				pstmt4.addBatch();
 				
 				
 			}
@@ -336,8 +291,9 @@ public class DatasendServlet_NHIStoIN extends HttpServlet {
 			}
 			
 			
-			
-			
+		*/	
+
+		
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/DataSend/datasend_nhis.jsp");

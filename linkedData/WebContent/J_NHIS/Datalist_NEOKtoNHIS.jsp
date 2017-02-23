@@ -64,8 +64,9 @@
 				<td><%=rs.getInt(5) %></td>
 				<td><%=rs.getInt(6)%></td>
 				
-				<form action="datasend_nhis" method="POST">
+				<form action="datasend_NHIStoIN" method="POST">
 				<input type="hidden" name="tableName" value="<%=tableName %>"/>
+				<input type="hidden" name="send_indexer" value="<%=send_indexer %>"/>
 
 				<td><input type="submit" value="Àü¼Û"/></td>
 				</form>
