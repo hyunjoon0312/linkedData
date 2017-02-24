@@ -1,3 +1,4 @@
+<%@page import="vo.MemberNEOK"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="db.JdbcUtilUpload"%>
 <%@page import="java.sql.ResultSet"%>
@@ -15,6 +16,11 @@
 <body>
 
 <%
+
+String NEOKid = ((MemberNEOK)request.getSession().getAttribute("NEOKid")).getNEOKId();
+
+
+
 String filename = request.getParameter("filename");
 String uploadername = request.getParameter("uploadername");
 String str_nhis_send = request.getParameter("nhis_send");
@@ -35,11 +41,6 @@ if(nhis_send == 0){
 
 
 
-
-
-
-
-
   <script type="text/javascript">  
     var ws = new WebSocket("ws://localhost:8080/linkedData/websocket");
 	
@@ -50,7 +51,7 @@ if(nhis_send == 0){
           ws.onopen = function()
           {
              // Web Socket is connected, send data using send()
-             ws.send("<%=uploadername%>연구자 <%=filename%>파일 식별자 건강보험공단 전송..."+"\n");
+        	  ws.send("NECA승인처(<%=NEOKid%>) : <%=uploadername%>연구자 요청한 식별자 건강보험공단 전송..."+"\n");
           };
 			
           ws.onmessage = function (evt) 

@@ -58,6 +58,9 @@
     </script>
     <!-- <input type="submit" value="send" onclick="send()" /> -->
  
+ 
+ 
+<a href = "/linkedData/J_STAT/Datalist_NEOKtoSTAT.jsp">데이터 요청 목록</a><br>
 <a href = "/linkedData/J_STAT/sessionLogoutSTAT.jsp">로그아웃</a>
 </body>
 </html>

@@ -15,23 +15,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import db.JdbcUtil;
-import db.JdbcUtilNHIS;
-import db.JdbcUtilUpload;
-import vo.MemberData;
 import vo.MemberKEY_NHIS;
-import vo.MemberSend;
+import vo.MemberKEY_STAT;
 
 /**
  * Servlet implementation class DatasendServlet
  */
-@WebServlet("/J_NHIS/datasend_NHIStoIN")
-public class DatasendServlet_NHIStoIN extends HttpServlet {
+@WebServlet("/J_STAT/datasend_STATtoIN")
+public class DatasendServlet_STATtoIN extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DatasendServlet_NHIStoIN() {
+	public DatasendServlet_STATtoIN() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -56,8 +53,8 @@ public class DatasendServlet_NHIStoIN extends HttpServlet {
 
 		String tableName = request.getParameter("tableName");
 		String str_send_indexer = request.getParameter("send_indexer");
-		String NHISid = request.getParameter("NHISid");
-		String NHISname = request.getParameter("NHISname");
+		String STATid = request.getParameter("STATid");
+		String STATname = request.getParameter("STATname");
 		int send_indexer = Integer.parseInt(str_send_indexer);
 
 		HttpSession session = request.getSession();
@@ -83,9 +80,9 @@ public class DatasendServlet_NHIStoIN extends HttpServlet {
 
 				con1 = JdbcUtil.getConnection();
 
-				System.out.println("(1)NHIS DB connect success");
+				System.out.println("(1)STAT DB connect success");
 
-				String sql = "UPDATE nhis_take_data.nhis_take_data_info set send_indexer = 1 where tableName = " + "'"
+				String sql = "UPDATE stat_take_data.stat_take_data_info set send_indexer = 1 where tableName = " + "'"
 						+ tableName + "'";
 
 				pstmt1 = con1.prepareStatement(sql);
@@ -110,20 +107,20 @@ public class DatasendServlet_NHIStoIN extends HttpServlet {
 				con5 = JdbcUtil.getConnection();
 				System.out.println("(2)NECA INDEXER DB connect success");
 
-				String sql = "INSERT INTO indexer_take_nhis.indexer_take_nhis_info Values(DEFAULT,?,?,?,?,?,?)";
+				String sql = "INSERT INTO indexer_take_stat.indexer_take_stat_info Values(DEFAULT,?,?,?,?,?,?)";
 
 				pstmt5 = con5.prepareStatement(sql);
 
 
 					pstmt5.setString(1, tableName);
-					pstmt5.setString(2, NHISid);
-					pstmt5.setString(3, NHISname);
+					pstmt5.setString(2, STATid);
+					pstmt5.setString(3, STATname);
 					pstmt5.setInt(4, 0);
 					pstmt5.setInt(5, 0);
 					pstmt5.setInt(6, 0);
 					
 					pstmt5.executeUpdate();
-				System.out.println("NHIS : INDEXER DB " + tableName + " 정보 데이터 저장 완료");
+				System.out.println("STAT : INDEXER DB " + tableName + " 정보 데이터 저장 완료");
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
@@ -141,15 +138,15 @@ public class DatasendServlet_NHIStoIN extends HttpServlet {
 			
 			// ArrayList 만들어서 데이터 리스트형태로 저장
 
-			ArrayList<MemberKEY_NHIS> list = new ArrayList<MemberKEY_NHIS>();
+			ArrayList<MemberKEY_STAT> list = new ArrayList<MemberKEY_STAT>();
 			int listsize = 0;
 
 			try {
 				con2 = JdbcUtil.getConnection();
 				System.out.println("(2)NHIS DB connect success");
 
-				String sql = "SELECT nhis.nhis_data.PERSON_ID, nhis.nhis_data.nhis_ID FROM nhis.nhis_data INNER JOIN nhis_take_data."
-						+ tableName + " ON nhis.nhis_data.PERSON_ID = nhis_take_data." + tableName + ".personID";
+				String sql = "SELECT stat.stat_data.PERSON_ID, stat.stat_data.stat_ID FROM stat.stat_data INNER JOIN stat_take_data."
+						+ tableName + " ON stat.stat_data.PERSON_ID = stat_take_data." + tableName + ".personID";
 
 				pstmt2 = con2.prepareStatement(sql);
 				rs1 = pstmt2.executeQuery();
@@ -157,12 +154,12 @@ public class DatasendServlet_NHIStoIN extends HttpServlet {
 				while (rs1.next()) {
 
 					String personID = rs1.getString(1);
-					String nhisID = rs1.getString(2);
-					MemberKEY_NHIS memberKEY_NHIS = new MemberKEY_NHIS(personID, nhisID);
-					list.add(memberKEY_NHIS);
+					String statID = rs1.getString(2);
+					MemberKEY_STAT memberKEY_STAT = new MemberKEY_STAT(personID, statID);
+					list.add(memberKEY_STAT);
 				}
 				listsize = list.size();
-				System.out.println(tableName + "식별자와 해당 NHIS 식별자 리스트로 불러옴");
+				System.out.println(tableName + "식별자와 해당 STAT 식별자 리스트로 불러옴");
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
@@ -184,8 +181,8 @@ public class DatasendServlet_NHIStoIN extends HttpServlet {
 				con3 = JdbcUtil.getConnection();
 				System.out.println("(1)NECA INDEXER DB connect success");
 
-				String sql = "CREATE TABLE indexer_take_nhis." + tableName
-						+ " (personID VARCHAR(20), nhisID VARCHAR(20), PRIMARY KEY(personID))";
+				String sql = "CREATE TABLE indexer_take_stat." + tableName
+						+ " (personID VARCHAR(20), statID VARCHAR(20), PRIMARY KEY(personID))";
 
 				pstmt3 = con3.prepareStatement(sql);
 				pstmt3.executeUpdate();
@@ -211,14 +208,14 @@ public class DatasendServlet_NHIStoIN extends HttpServlet {
 				System.out.println("(2)NECA INDEXER DB connect success");
 
 				// 나중에 내 방식대로 할 때 필요한 코드
-				String sql = "INSERT INTO indexer_take_nhis." + tableName + " Values(?,?)";
+				String sql = "INSERT INTO indexer_take_stat." + tableName + " Values(?,?)";
 
 				pstmt4 = con4.prepareStatement(sql);
 
 				for (int i = 0; i < listsize; i++) {
 
 					pstmt4.setString(1, list.get(i).getpersonID());
-					pstmt4.setString(2, list.get(i).getnhisID());
+					pstmt4.setString(2, list.get(i).getstatID());
 					pstmt4.addBatch();
 
 				}
@@ -241,7 +238,7 @@ public class DatasendServlet_NHIStoIN extends HttpServlet {
 
 		}
 
-		RequestDispatcher rd = request.getRequestDispatcher("/J_NHIS/Datasend_result_NHIStoIN.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/J_STAT/Datasend_result_STATtoIN.jsp");
 		rd.forward(request, response);
 
 	}

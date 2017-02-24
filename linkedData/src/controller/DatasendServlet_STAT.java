@@ -433,7 +433,7 @@ public class DatasendServlet_STAT extends HttpServlet {
 						
 						//나중에 내 방식대로 할 때 필요한 코드
 						//String sql = "INSERT INTO "+uploadername+"_"+refilename+" Values(?,?)";
-						String sql = "INSERT INTO stat_take_data.stat_take_data_info Values(default,?,?,?,?,?,?)";
+						String sql = "INSERT INTO stat_take_data.stat_take_data_info Values(default,?,?,?,?,?,?,?,?)";
 						
 						pstmt5 = con5.prepareStatement(sql);
 						
@@ -443,6 +443,8 @@ public class DatasendServlet_STAT extends HttpServlet {
 						pstmt5.setInt(4, memberSend.getRequest_row());
 						pstmt5.setInt(5, memberSend.getAvailable_row());
 						pstmt5.setInt(6, 0);
+						pstmt5.setInt(7, 0);
+						pstmt5.setInt(8, 0);
 						
 						//나중에 내 방식대로 할때 필요한 코드
 						/*	pstmt6.setInt(1, list.get(i).getLinkID());

@@ -2,26 +2,26 @@ package vo;
 
 public class MemberKEY_NHIS {
 	
-	private String person_id;
-	private String nhis_id;
+	private String personID;
+	private String nhisID;
 	
-	public MemberKEY_NHIS(String person_id, String nhis_id){
-		this.person_id = person_id;
-		this.nhis_id = nhis_id;
+	public MemberKEY_NHIS(String personID, String nhisID){
+		this.personID = personID;
+		this.nhisID = nhisID;
 	}
 	
 	
-	public String getPerson_id() {
-		return person_id;
+	public String getpersonID() {
+		return personID;
 	}
-	public void setPerson_id(String person_id) {
-		this.person_id = person_id;
+	public void setpersonID(String personID) {
+		this.personID = personID;
 	}
-	public String getNhis_id() {
-		return nhis_id;
+	public String getnhisID() {
+		return nhisID;
 	}
-	public void setNhis_id(String nhis_id) {
-		this.nhis_id = nhis_id;
+	public void setnhisID(String nhisID) {
+		this.nhisID = nhisID;
 	}
 
 	

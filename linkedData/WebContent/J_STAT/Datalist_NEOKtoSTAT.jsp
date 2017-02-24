@@ -1,4 +1,4 @@
-<%@page import="vo.MemberNHIS"%>
+<%@page import="vo.MemberSTAT"%>
 <%@page import="db.JdbcUtil"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.sql.Time"%>
@@ -19,8 +19,8 @@
 </head>
 <body>
 	<%
-	String NHISid = ((MemberNHIS)request.getSession().getAttribute("NHISid")).getNHISId();
-	String NHISname = ((MemberNHIS)request.getSession().getAttribute("NHISid")).getNHISName();
+	String STATid = ((MemberSTAT)request.getSession().getAttribute("STATid")).getSTATId();
+	String STATname = ((MemberSTAT)request.getSession().getAttribute("STATid")).getSTATName();
 	
 	
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	
@@ -32,7 +32,7 @@
 		try {
 			stmt = conn.createStatement();
 
-			String query = "select * from nhis_take_data.nhis_take_data_info";
+			String query = "select * from stat_take_data.stat_take_data_info";
 			rs = stmt.executeQuery(query);
 	%>
 
@@ -44,7 +44,7 @@
 				<th>요청 데이터 수</th>
 				<th>전송 가능 데이터 수</th>
 				<th>NECA INDEXER</th>
-				<th>연계 플랫폼
+				<th>연계 플랫폼</th>
 			</tr>
 			<%
 				while (rs.next()) { //rs 를 통해 테이블 객체들의 필드값을 넘겨볼 수 있다.
@@ -67,11 +67,11 @@
 				<td><%=rs.getInt(5) %></td>
 				<td><%=rs.getInt(6)%></td>
 				
-				<form action="datasend_NHIStoIN" method="POST">
+				<form action="datasend_STATtoIN" method="POST">
 				<input type="hidden" name="tableName" value="<%=tableName %>"/>
 				<input type="hidden" name="neokID" value="<%=neokID %>"/>
-				<input type="hidden" name="NHISid" value="<%=NHISid %>"/>
-				<input type="hidden" name="NHISname" value="<%=NHISname %>"/>
+				<input type="hidden" name="STATid" value="<%=STATid %>"/>
+				<input type="hidden" name="STATname" value="<%=STATname %>"/>
 				<input type="hidden" name="send_indexer" value="<%=send_indexer %>"/>
 
 				<%if(send_indexer == 0){ %>
@@ -80,7 +80,6 @@
 				<td><input type="submit" value="전송완료" disabled="disabled"/></td>
 				<%} %>				
 				</form>
-				
 				
 				<!-- indexer에게 연결번호 받고 liker에게 보내지 않았을때만 활성화 -->
 				<form action="datasend_STATtoLINK" method="POST">
