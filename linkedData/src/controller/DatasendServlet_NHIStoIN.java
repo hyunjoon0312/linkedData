@@ -110,7 +110,7 @@ public class DatasendServlet_NHIStoIN extends HttpServlet {
 				con5 = JdbcUtil.getConnection();
 				System.out.println("(2)NECA INDEXER DB connect success");
 
-				String sql = "INSERT INTO indexer_take_nhis.indexer_take_nhis_info Values(DEFAULT,?,?,?,?,?,?)";
+				String sql = "INSERT INTO indexer_take_nhis.indexer_take_nhis_info Values(DEFAULT,?,?,?,?)";
 
 				pstmt5 = con5.prepareStatement(sql);
 
@@ -119,8 +119,8 @@ public class DatasendServlet_NHIStoIN extends HttpServlet {
 					pstmt5.setString(2, NHISid);
 					pstmt5.setString(3, NHISname);
 					pstmt5.setInt(4, 0);
-					pstmt5.setInt(5, 0);
-					pstmt5.setInt(6, 0);
+			
+		
 					
 					pstmt5.executeUpdate();
 				System.out.println("NHIS : INDEXER DB " + tableName + " 정보 데이터 저장 완료");

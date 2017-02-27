@@ -107,7 +107,7 @@ public class DatasendServlet_STATtoIN extends HttpServlet {
 				con5 = JdbcUtil.getConnection();
 				System.out.println("(2)NECA INDEXER DB connect success");
 
-				String sql = "INSERT INTO indexer_take_stat.indexer_take_stat_info Values(DEFAULT,?,?,?,?,?,?)";
+				String sql = "INSERT INTO indexer_take_stat.indexer_take_stat_info Values(DEFAULT,?,?,?,?)";
 
 				pstmt5 = con5.prepareStatement(sql);
 
@@ -116,8 +116,7 @@ public class DatasendServlet_STATtoIN extends HttpServlet {
 					pstmt5.setString(2, STATid);
 					pstmt5.setString(3, STATname);
 					pstmt5.setInt(4, 0);
-					pstmt5.setInt(5, 0);
-					pstmt5.setInt(6, 0);
+
 					
 					pstmt5.executeUpdate();
 				System.out.println("STAT : INDEXER DB " + tableName + " 정보 데이터 저장 완료");

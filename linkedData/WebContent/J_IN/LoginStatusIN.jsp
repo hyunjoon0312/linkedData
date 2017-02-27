@@ -51,7 +51,9 @@ NECA INDEXER 로그인 성공<br/>
        }
 
     </script>
- 
+
+<br>
+<a href = "/linkedData/J_IN/Datalist_ORGtoINDEXER.jsp">데이터목록</a><br>
 <a href = "/linkedData/J_IN/sessionLogoutIN.jsp">로그아웃</a>
 </body>
 </html>

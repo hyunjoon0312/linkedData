@@ -10,7 +10,7 @@
 
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,12 +19,9 @@
 </head>
 <body>
 	<%
-	String INid = ((MemberIN)request.getSession().getAttribute("INid")).getINId();
-	String INname = ((MemberIN)request.getSession().getAttribute("INid")).getINName();
-	
-	
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	
-	
+		String INid = ((MemberIN) request.getSession().getAttribute("INid")).getINId();
+		String INname = ((MemberIN) request.getSession().getAttribute("INid")).getINName();
+
 		Connection conn1 = JdbcUtil.getConnection();
 		Statement stmt1 = null;
 		ResultSet rs1 = null;
@@ -32,193 +29,207 @@
 		try {
 			stmt1 = conn1.createStatement();
 
-			String query = "select * from stat_take_data.stat_take_data_info";
-			rs1 = stmt1.executeQuery(query);
-	%>
-		<table border="0">
-		<tr>
-		
-		<!-- ---------- NHIS 데이터 info ----------- -->
-		<td>
-		
-<table border="1" cellspacing="0">
-			<tr>
-				<th>요청 시간</th>
-				<th>NHIS요청자 ID</th>
-				<th>NHIS요청자 이름</th>
-				<th>NHIS</th>
-				<th>연계 플랫폼</th>
-			</tr>
-			<%
-				while (rs1.next()) { //rs 를 통해 테이블 객체들의 필드값을 넘겨볼 수 있다.
-					String time = rs1.getString(1);
-					Date date_time = format.parse(time);
-					String format_time = (String)format.format(date_time);
-					String neokID = rs1.getString(3);
-					String neokName = rs1.getString(4);
-					String tableName = rs1.getString(2);
-					
-					int send_indexer = rs1.getInt(7);
-					int receive_indexer = rs1.getInt(8);
-					int send_link = rs1.getInt(9);
-			%>
+			String query = "INSERT INTO indexer_linknum.indexer_take_data_info(nhisRequestTime, nhisID, nhisName, nhisTableName, statRequestTime, statID, statName, statTableName) SELECT indexer_take_nhis.indexer_take_nhis_info.requestTime, indexer_take_nhis.indexer_take_nhis_info.nhisID, indexer_take_nhis.indexer_take_nhis_info.nhisName, indexer_take_nhis.indexer_take_nhis_info.table_name, indexer_take_stat.indexer_take_stat_info.requestTime, indexer_take_stat.indexer_take_stat_info.statID, indexer_take_stat.indexer_take_stat_info.statName, indexer_take_stat.indexer_take_stat_info.table_name FROM indexer_take_nhis.indexer_take_nhis_info INNER JOIN indexer_take_stat.indexer_take_stat_info ON indexer_take_nhis.indexer_take_nhis_info.table_name = indexer_take_stat.indexer_take_stat_info.table_name WHERE indexer_take_nhis.indexer_take_nhis_info.join_result = 0 and indexer_take_stat.indexer_take_stat_info.join_result = 0 ";
+			stmt1.executeUpdate(query);
 
-			<tr>
-				<td><%=format_time %></td>
-				<td><%=neokID%></td>
-				<td><%=neokName%></td>
-				<td><%=rs1.getInt(5) %></td>
-				<td><%=rs1.getInt(6)%></td>
-				
-				<form action="datasend_STATtoIN" method="POST">
-				<input type="hidden" name="tableName" value="<%=tableName %>"/>
-				<input type="hidden" name="neokID" value="<%=neokID %>"/>
-				<input type="hidden" name="STATid" value="<%=STATid %>"/>
-				<input type="hidden" name="STATname" value="<%=STATname %>"/>
-				<input type="hidden" name="send_indexer" value="<%=send_indexer %>"/>
-
-				<%if(send_indexer == 0){ %>
-				<td><input type="submit" value="전송"/></td>
-				<%}else{ %>
-				<td><input type="submit" value="전송완료" disabled="disabled"/></td>
-				<%} %>				
-				</form>
-				
-				<!-- indexer에게 연결번호 받고 liker에게 보내지 않았을때만 활성화 -->
-				<form action="datasend_STATtoLINK" method="POST">
-				
-				
-				
-				<%if(receive_indexer == 0 && send_link == 0){ %>
-				<td><input type = "submit" value ="연결번호 받지않음" disabled="disabled"/></td>
-				<%}else if(receive_indexer == 1 && send_link == 0){ %>
-				<td><input type = "submit" value = "데이터 전송" /></td>
-				<%}else{ %>
-				<td><input type="submit" value = "전송완료" disabled="disabled"/></td>
-				<%} %>
-				</form>
-				
-			<%
-				} // end while
-			%>
+			System.out.println("(1)stmt1");
 			
-			
-			</tr>
-		</table>
-		
-	
-	<%
-		
 		} catch (Exception e) {
 			out.println("err:" + e.toString());
-		}finally{
-			if(rs1 != null){rs1.close();} // ResultSet exit
-			if(stmt1 != null){stmt1.close();} // Statement exit
-			if(conn1 != null){conn1.close();} // Connection exit
+		} finally {
+			if (rs1 != null) {
+				rs1.close();
+			} // ResultSet exit
+			if (stmt1 != null) {
+				stmt1.close();
+			} // Statement exit
+			if (conn1 != null) {
+				conn1.close();
+			} // Connection exit
 		}
-	%>
-	
 
-	</td>
-
-		<!-- ---------- STAT 데이터 info ----------- -->
-	<td>
-	
-	<%	
-	
 		Connection conn2 = JdbcUtil.getConnection();
 		Statement stmt2 = null;
 		ResultSet rs2 = null;
-	
+
 		try {
-		stmt2 = conn2.createStatement();
+			stmt2 = conn2.createStatement();
 
-		String query = "select * from stat_take_data.stat_take_data_info";
-		rs2 = stmt2.executeQuery(query); %>
-	
-	
-	<table border="1" cellspacing="0">
-			<tr>
-				<th>요청 시간</th>
-				<th>NECA요청자 ID</th>
-				<th>NECA요청자 이름</th>
-				<th>요청 데이터 수</th>
-				<th>전송 가능 데이터 수</th>
-				<th>NECA INDEXER</th>
-				<th>연계 플랫폼</th>
-			</tr>
-			<%
-				while (rs2.next()) { //rs 를 통해 테이블 객체들의 필드값을 넘겨볼 수 있다.
-					String time = rs2.getString(1);
-					Date date_time = format.parse(time);
-					String format_time = (String)format.format(date_time);
-					String neokID = rs2.getString(3);
-					String neokName = rs2.getString(4);
-					String tableName = rs2.getString(2);
-					
-					int send_indexer = rs2.getInt(7);
-					int receive_indexer = rs2.getInt(8);
-					int send_link = rs2.getInt(9);
-			%>
-
-			<tr>
-				<td><%=format_time %></td>
-				<td><%=neokID%></td>
-				<td><%=neokName%></td>
-				<td><%=rs2.getInt(5) %></td>
-				<td><%=rs2.getInt(6)%></td>
-				
-				<form action="datasend_STATtoIN" method="POST">
-				<input type="hidden" name="tableName" value="<%=tableName %>"/>
-				<input type="hidden" name="neokID" value="<%=neokID %>"/>
-				<input type="hidden" name="STATid" value="<%=STATid %>"/>
-				<input type="hidden" name="STATname" value="<%=STATname %>"/>
-				<input type="hidden" name="send_indexer" value="<%=send_indexer %>"/>
-
-				<%if(send_indexer == 0){ %>
-				<td><input type="submit" value="전송"/></td>
-				<%}else{ %>
-				<td><input type="submit" value="전송완료" disabled="disabled"/></td>
-				<%} %>				
-				</form>
-				
-				<!-- indexer에게 연결번호 받고 liker에게 보내지 않았을때만 활성화 -->
-				<form action="datasend_STATtoLINK" method="POST">
-				
-				
-				
-				<%if(receive_indexer == 0 && send_link == 0){ %>
-				<td><input type = "submit" value ="연결번호 받지않음" disabled="disabled"/></td>
-				<%}else if(receive_indexer == 1 && send_link == 0){ %>
-				<td><input type = "submit" value = "데이터 전송" /></td>
-				<%}else{ %>
-				<td><input type="submit" value = "전송완료" disabled="disabled"/></td>
-				<%} %>
-				</form>
-				
-			<%
-				} // end while
-			%>
+			String query = "UPDATE indexer_take_nhis.indexer_take_nhis_info set join_result = 1 where indexer_take_nhis.indexer_take_nhis_info.join_result = 0";
+			stmt2.executeUpdate(query);
 			
+			System.out.println("(2)stmt2");
+
 			
-			</tr>
-		</table>
-		
-	
-	<%
-		
 		} catch (Exception e) {
 			out.println("err:" + e.toString());
-		}finally{
-			if(rs2 != null){rs2.close();} // ResultSet exit
-			if(stmt2 != null){stmt2.close();} // Statement exit
-			if(conn2 != null){conn2.close();} // Connection exit
+		} finally {
+			if (rs2 != null) {
+				rs2.close();
+			} // ResultSet exit
+			if (stmt2 != null) {
+				stmt2.close();
+			} // Statement exit
+			if (conn2 != null) {
+				conn2.close();
+			} // Connection exit
 		}
+
+		
+		
+		
+		Connection conn3 = JdbcUtil.getConnection();
+		Statement stmt3 = null;
+		ResultSet rs3 = null;
+
+		try {
+			stmt3 = conn3.createStatement();
+
+			String query = "UPDATE indexer_take_stat.indexer_take_stat_info set join_result = 1 where indexer_take_stat.indexer_take_stat_info.join_result = 0";
+			stmt3.executeUpdate(query);
+			
+			System.out.println("(3)stmt3");
+
+			
+		} catch (Exception e) {
+			out.println("err:" + e.toString());
+		} finally {
+			if (rs3 != null) {
+				rs3.close();
+			} // ResultSet exit
+			if (stmt3 != null) {
+				stmt3.close();
+			} // Statement exit
+			if (conn3 != null) {
+				conn3.close();
+			} // Connection exit
+		}
+		
+		Connection conn4 = JdbcUtil.getConnection();
+		Statement stmt4 = null;
+		ResultSet rs4 = null;
+		
+		
+		try {
+			stmt4 = conn4.createStatement();
+
+			String query = "select * from indexer_linknum.indexer_take_data_info";
+			rs4 = stmt4.executeQuery(query);
+			
+			System.out.println("(4)stmt4");
+
 	%>
-	
-	
-	</td>
-	</tr>
+	<table border="0">
+		<tr>
+
+			<!-- ---------- indexer가 받은 데이터 info ----------- -->
+			<td>
+
+				<table border="1" cellspacing="0">
+					<tr>
+						<th>순서</th>
+						<th>NHIS 요청 시간</th>
+						<th>NHIS 요청자 ID</th>
+						<th>NHIS 요청자 이름</th>
+						<th>STAT 요청 시간</th>
+						<th>STAT 요청자 ID</th>
+						<th>STAT 요청자 이름</th>
+						<th>각 기관 전송</th>
+						<th>대조표 전송</th>
+					</tr>
+					<%
+						while (rs4.next()) { //rs 를 통해 테이블 객체들의 필드값을 넘겨볼 수 있다.
+								String seqID = rs4.getString(1);
+								String nhisRequestTime = rs4.getString(2);
+								String nhisID = rs4.getString(3);
+								String nhisName = rs4.getString(4);
+								String nhisTableName = rs4.getString(5);
+								String statRequestTime = rs4.getString(6);
+								String statID = rs4.getString(7);
+								String statName = rs4.getString(8);
+								String statTableName = rs4.getString(9);
+								
+								int org_send = rs4.getInt(10);
+								int checklist_send = rs4.getInt(11);
+					%>
+
+					<tr>
+						<td><%=seqID%></td>
+						<td><%=nhisRequestTime%></td>
+						<td><%=nhisID%></td>
+						<td><%=nhisName%></td>
+						<td><%=statRequestTime%></td>
+						<td><%=statID%></td>
+						<td><%=statName%></td>
+
+						<form action="datasend_INtoORG" method="POST">
+							<input type="hidden" name="nhisTableName" value="<%=nhisTableName%>" />
+							<input type="hidden" name="statTableName" value="<%=statTableName%>" />
+							<input type="hidden" name="org_send" value="<%=org_send%>" />
+							<input type="hidden" name="nhisID" value="<%=nhisID%>" />
+							<input type="hidden" name="statID" value="<%=statID%>" />
+
+							<%
+								if (org_send == 0) {
+							%>
+							<td><input type="submit" value="전송" /></td>
+							<%
+								} else {
+							%>
+							<td><input type="submit" value="전송완료" disabled="disabled" /></td>
+							<%
+								}
+							%>
+						</form>
+
+
+
+						<form action="datasend_INtoLINK" method="POST">
+							<input type="hidden" name="nhisTableName" value="<%=nhisTableName%>" />
+							<input type="hidden" name="statTableName" value="<%=statTableName%>" />
+							<input type="hidden" name="checklist_send_send" value="<%=checklist_send%>" />
+							<input type="hidden" name="statID" value="<%=statID%>" />
+							<input type="hidden" name="nhisID" value="<%=nhisID%>" />
+
+
+							<%
+								if (checklist_send == 0) {
+							%>
+							<td><input type="submit" value="전송" /></td>
+							<%
+								} else {
+							%>
+							<td><input type="submit" value="전송완료" disabled="disabled" /></td>
+							<%
+								}
+							%>
+						</form>
+
+						<%
+							} // end while
+						%>
+
+
+					</tr>
+				</table> <%
+ 	} catch (Exception e) {
+ 		out.println("err:" + e.toString());
+ 	} finally {
+ 		if (rs4 != null) {
+ 			rs4.close();
+ 		} // ResultSet exit
+ 		if (stmt4 != null) {
+ 			stmt4.close();
+ 		} // Statement exit
+ 		if (conn4 != null) {
+ 			conn4.close();
+ 		} // Connection exit
+ 	}
+ %>
+
+
+			</td>
+		</tr>
 	</table>
 
 </body>
