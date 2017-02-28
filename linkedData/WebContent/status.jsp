@@ -18,11 +18,22 @@
     </form> -->
     <br />
     <!-- 결과 메시지 보여주는 창 -->
-    <textarea id="messageTextArea" rows="10" cols="50"></textarea>
+    <textarea id="messageTextArea" rows="30" cols="80"></textarea>
      
     <script type="text/javascript">  
     var ws = new WebSocket("ws://localhost:8080/linkedData/websocket");
 	
+   function chage(){
+	   
+	   var element = document.getElementById("span1");
+	   element.style.fontSize = "48pt";
+	   element.style.color = "#f00";
+	   element.style.fontWeight = "bold";
+
+   }
+    
+ 
+    
        if ("WebSocket" in window)
        {
           
@@ -31,7 +42,8 @@
       
           ws.onopen = function()
           {
-             // Web Socket is connected, send data using send()
+			
+        	  // Web Socket is connected, send data using send()
              ws.send("대기중..."+"\n");
              
           };
@@ -61,6 +73,9 @@
     }
  
     </script>
+    
+    
+    
     <!-- <input type="submit" value="send" onclick="send()" /> -->
 </body>
 </html>

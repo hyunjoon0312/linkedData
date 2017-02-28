@@ -187,9 +187,11 @@
 						<form action="datasend_INtoLINK" method="POST">
 							<input type="hidden" name="nhisTableName" value="<%=nhisTableName%>" />
 							<input type="hidden" name="statTableName" value="<%=statTableName%>" />
-							<input type="hidden" name="checklist_send_send" value="<%=checklist_send%>" />
+							<input type="hidden" name="checklist_send" value="<%=checklist_send%>" />
 							<input type="hidden" name="statID" value="<%=statID%>" />
 							<input type="hidden" name="nhisID" value="<%=nhisID%>" />
+							<input type="hidden" name="inID" value="<%=INid%>" />
+							<input type="hidden" name="inName" value="<%=INname%>" />
 
 
 							<%

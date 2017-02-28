@@ -56,6 +56,8 @@ String LINKname = ((MemberLINK)request.getSession().getAttribute("LINKid")).getL
     </script>
     <!-- <input type="submit" value="send" onclick="send()" /> -->
  
-<a href = "/linkedData/J_LINK/sessionLogoutLINK.jsp">로그아웃</a>
+ 
+<a href = "./Datalist_INDEXERtoLINK.jsp">대조표 목록</a> <br>
+<a href = "./sessionLogoutLINK.jsp">로그아웃</a>
 </body>
 </html>

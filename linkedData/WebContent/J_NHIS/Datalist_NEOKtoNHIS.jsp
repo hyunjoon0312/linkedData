@@ -82,10 +82,10 @@
 				</form>
 				
 				
-				<!-- indexer에게 연결번호 받고 liker에게 보내지 않았을때만 활성화 -->
-				<form action="datasend_STATtoLINK" method="POST">
-				
-				
+		
+				<form action="datasend_NHIStoLINK" method="POST">
+				<input type="hidden" name="tableName" value="<%=tableName %>"/>
+				<input type="hidden" name="NHISid" value="<%=NHISid %>"/>
 				
 				<%if(receive_indexer == 0 && send_link == 0){ %>
 				<td><input type = "submit" value ="연결번호 받지않음" disabled="disabled"/></td>
