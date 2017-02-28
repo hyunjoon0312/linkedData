@@ -18,13 +18,13 @@ import db.JdbcUtil;
  * Servlet implementation class datasend_INtoORG
  */
 @WebServlet("/J_IN/datasend_INtoORG")
-public class datasend_INtoORG extends HttpServlet {
+public class Datasend_INtoORG extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public datasend_INtoORG() {
+    public Datasend_INtoORG() {
         super();
         // TODO Auto-generated constructor stub
     }

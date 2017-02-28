@@ -83,7 +83,8 @@
 				
 				<!-- indexer에게 연결번호 받고 liker에게 보내지 않았을때만 활성화 -->
 				<form action="datasend_STATtoLINK" method="POST">
-				
+				<input type="hidden" name="tableName" value="<%=tableName %>"/>
+				<input type="hidden" name="STATid" value="<%=STATid %>"/>
 				
 				
 				<%if(receive_indexer == 0 && send_link == 0){ %>

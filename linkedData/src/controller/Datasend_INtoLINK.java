@@ -18,13 +18,13 @@ import db.JdbcUtil;
  * Servlet implementation class datasend_IntoLINK
  */
 @WebServlet("/J_IN/datasend_IntoLINK")
-public class datasend_INtoLINK extends HttpServlet {
+public class Datasend_INtoLINK extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public datasend_INtoLINK() {
+    public Datasend_INtoLINK() {
         super();
         // TODO Auto-generated constructor stub
     }

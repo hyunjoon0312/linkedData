@@ -18,16 +18,16 @@ import javax.servlet.http.HttpServletResponse;
 import db.JdbcUtil;
 
 /**
- * Servlet implementation class Datasend_NHIStoLINK
+ * Servlet implementation class Datasend_stattoLINK
  */
-@WebServlet("/J_NHIS/datasend_NHIStoLINK")
-public class Datasend_NHIStoLINK extends HttpServlet {
+@WebServlet("/J_STAT/datasend_STATtoLINK")
+public class Datasend_STATtoLINK extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Datasend_NHIStoLINK() {
+    public Datasend_STATtoLINK() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,7 +47,7 @@ public class Datasend_NHIStoLINK extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		
-		String nhisID = request.getParameter("NHISid");
+		String statID = request.getParameter("STATid");
 		String tableName = request.getParameter("tableName"); 
 		
 		Connection con1 = null;
@@ -64,7 +64,7 @@ public class Datasend_NHIStoLINK extends HttpServlet {
 		
 		
 		
-		ArrayList<String> arrayList = new ArrayList<String>();
+//		ArrayList<String> arrayList = new ArrayList<String>();
 		
 //		// 전체 DB명 가져오기
 //		
@@ -72,10 +72,10 @@ public class Datasend_NHIStoLINK extends HttpServlet {
 //
 //			con1 = JdbcUtil.getConnection();
 //
-//			System.out.println("(1)NHIS connect success");
+//			System.out.println("(1)stat connect success");
 //
 //			
-//			String sql = "SELECT * FROM nhis.nhis_data";
+//			String sql = "SELECT * FROM stat.stat_data";
 //			pstmt1 = con1.prepareStatement(sql);
 //			rs = pstmt1.executeQuery();
 //			
@@ -102,7 +102,7 @@ public class Datasend_NHIStoLINK extends HttpServlet {
 //		
 		
 		
-		// 연계 기관에서 nhis data 받을 테이블 생성
+		// 연계 기관에서 stat data 받을 테이블 생성
 
 		try {
 
@@ -110,11 +110,11 @@ public class Datasend_NHIStoLINK extends HttpServlet {
 
 			System.out.println("(1)LINK DB connect success");
 
-			String sql = "CREATE TABLE link_take_nhis."+nhisID+"_"+tableName+"(linkID int(20), STND_Y int(20), YKIHO_ID INT(20), YKIHO_GUBUN_CD INT(20), ORG_TYPE INT(20), YKIHO_SIDO INT(20), SICKBED_CNT INT(20), DR_CNT INT(20), CT_YN INT(20), MRI_YN INT(20), PET_YN INT(20), PRIMARY KEY(linkID))";
+			String sql = "CREATE TABLE link_take_stat."+statID+"_"+tableName+"(linkID int(20), REPORT_YMD VARCHAR(20), ADDRESS INT(20), GENDER INT(20), DEATH_YMD VARCHAR(20), DEATH_TIME INT(20), DEATH_PLACE INT(20), DEATH_JOB VARCHAR(20), MARRY INT(20), EDU INT(20), DEATH_CAU1 VARCHAR(20), DEATH_CAU1_Parent VARCHAR(20), DEATH_AGE INT(20), PRIMARY KEY(linkID))";
 
 			pstmt1 = con1.prepareStatement(sql);
 			pstmt1.executeUpdate();
-			System.out.println("NHIS 연결번호 + 데이터 저장 테이블 생성 완료");
+			System.out.println("STAT 연결번호 + 데이터 저장 테이블 생성 완료");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -128,18 +128,18 @@ public class Datasend_NHIStoLINK extends HttpServlet {
 		}
 	
 		
-		// 연계 기관에서 nhis data 전송
+		// 연계 기관에서 stat data 전송
 		
 		try {
 
 			con2 = JdbcUtil.getConnection();
 
-			String sql = "INSERT INTO link_take_nhis."+nhisID+"_"+tableName+" select nhis_take_link."+nhisID+"_"+tableName+".linkID, nhis.nhis_data.STND_Y, nhis.nhis_data.YKIHO_ID, nhis.nhis_data.YKIHO_GUBUN_CD, nhis.nhis_data.ORG_TYPE, nhis.nhis_data.YKIHO_SIDO, nhis.nhis_data.SICKBED_CNT,nhis.nhis_data.DR_CNT, nhis.nhis_data.CT_YN, nhis.nhis_data.MRI_YN, nhis.nhis_data.PET_YN FROM nhis_take_link.nhistest_rtest_upload_sample INNER JOIN nhis.nhis_data ON nhis_take_link."+nhisID+"_"+tableName+".nhisID = nhis.nhis_data.nhis_ID";
+			String sql = "INSERT INTO link_take_stat."+statID+"_"+tableName+" select stat_take_link."+statID+"_"+tableName+".linkID, stat.stat_data.REPORT_YMD, stat.stat_data.ADDRESS, stat.stat_data.GENDER, stat.stat_data.DEATH_YMD, stat.stat_data.DEATH_TIME, stat.stat_data.DEATH_PLACE, stat.stat_data.DEATH_JOB, stat.stat_data.MARRY, stat.stat_data.EDU, stat.stat_data.DEATH_CAU1, stat.stat_data.DEATH_CAU1_Parent, stat.stat_data.DEATH_AGE FROM stat_take_link.stattest_rtest_upload_sample INNER JOIN stat.stat_data ON stat_take_link."+statID+"_"+tableName+".statID = stat.stat_data.stat_ID";
 
 			pstmt2 = con2.prepareStatement(sql);
 			pstmt2.executeUpdate();
 			
-			System.out.println("NHIS 연결번호 + 데이터 전송 완료");
+			System.out.println("STAT 연결번호 + 데이터 전송 완료");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -154,15 +154,15 @@ public class Datasend_NHIStoLINK extends HttpServlet {
 		}
 		
 		
-		// 연결번호 + 대조표 전송해줬으므로 nhis_take_data.nhis_take_data_info 에서 send_link를 1로 바꿔줌.
+		// 연결번호 + 대조표 전송해줬으므로 stat_take_data.stat_take_data_info 에서 send_link를 1로 바꿔줌.
 		
 		try {
 
 			con3 = JdbcUtil.getConnection();
 
-			System.out.println("(1)NHIS DB connect success");
+			System.out.println("(1)stat DB connect success");
 
-			String sql = "UPDATE nhis_take_data.nhis_take_data_info set send_link = 1 where tableName = '" + tableName + "'";
+			String sql = "UPDATE stat_take_data.stat_take_data_info set send_link = 1 where tableName = '" + tableName + "'";
 
 			pstmt3 = con3.prepareStatement(sql);
 			pstmt3.executeUpdate();
