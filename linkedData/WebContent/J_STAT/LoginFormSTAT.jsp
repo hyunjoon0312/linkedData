@@ -38,7 +38,7 @@
 <body>
 <% 
 	MemberSTAT STATid = ((MemberSTAT)session.getAttribute("STATid"));
-	String seSTATid = (String)session.getAttribute("STATid");
+	//String seSTATid = (String)session.getAttribute("STATid");
 
 
 	if(STATid == null){

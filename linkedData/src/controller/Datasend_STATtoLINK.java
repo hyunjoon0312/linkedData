@@ -134,7 +134,7 @@ public class Datasend_STATtoLINK extends HttpServlet {
 
 			con2 = JdbcUtil.getConnection();
 
-			String sql = "INSERT INTO link_take_stat."+statID+"_"+tableName+" select stat_take_link."+statID+"_"+tableName+".linkID, stat.stat_data.REPORT_YMD, stat.stat_data.ADDRESS, stat.stat_data.GENDER, stat.stat_data.DEATH_YMD, stat.stat_data.DEATH_TIME, stat.stat_data.DEATH_PLACE, stat.stat_data.DEATH_JOB, stat.stat_data.MARRY, stat.stat_data.EDU, stat.stat_data.DEATH_CAU1, stat.stat_data.DEATH_CAU1_Parent, stat.stat_data.DEATH_AGE FROM stat_take_link.stattest_rtest_upload_sample INNER JOIN stat.stat_data ON stat_take_link."+statID+"_"+tableName+".statID = stat.stat_data.stat_ID";
+			String sql = "INSERT INTO link_take_stat."+statID+"_"+tableName+" select stat_take_link."+statID+"_"+tableName+".linkID, stat.stat_data.REPORT_YMD, stat.stat_data.ADDRESS, stat.stat_data.GENDER, stat.stat_data.DEATH_YMD, stat.stat_data.DEATH_TIME, stat.stat_data.DEATH_PLACE, stat.stat_data.DEATH_JOB, stat.stat_data.MARRY, stat.stat_data.EDU, stat.stat_data.DEATH_CAU1, stat.stat_data.DEATH_CAU1_Parent, stat.stat_data.DEATH_AGE FROM stat_take_link."+statID+"_"+tableName+" INNER JOIN stat.stat_data ON stat_take_link."+statID+"_"+tableName+".statID = stat.stat_data.stat_ID";
 
 			pstmt2 = con2.prepareStatement(sql);
 			pstmt2.executeUpdate();
@@ -179,6 +179,62 @@ public class Datasend_STATtoLINK extends HttpServlet {
 				JdbcUtil.close(pstmt3);
 			}
 		}
+		
+		
+		
+		// link_take_checklist.link_take_checklist_info 에 데이터 보내준 statID 입력
+		
+		try {
+
+			con3 = JdbcUtil.getConnection();
+
+			System.out.println("(2)stat DB connect success");
+
+			String sql = "UPDATE link_take_checklist.link_take_checklist_info set data_statID = '"+statID+"' where statTableName = '" + tableName + "'";
+
+			pstmt3 = con3.prepareStatement(sql);
+			pstmt3.executeUpdate();
+			
+			System.out.println("데이터 전송해준 statID 입력");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (con3 != null) {
+				JdbcUtil.close(con3);
+			}
+			if (pstmt3 != null) {
+				JdbcUtil.close(pstmt3);
+			}
+		}
+		
+		
+		// link_take_checklist.link_take_checklist_info 에 stat_receive 1로 변경
+		
+				try {
+
+					con3 = JdbcUtil.getConnection();
+
+					System.out.println("(3)stat DB connect success");
+
+					String sql = "UPDATE link_take_checklist.link_take_checklist_info set stat_receive = 1 where statTableName = '" + tableName + "'";
+
+					pstmt3 = con3.prepareStatement(sql);
+					pstmt3.executeUpdate();
+					
+					System.out.println("stat_receive 1로 변경");
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					if (con3 != null) {
+						JdbcUtil.close(con3);
+					}
+					if (pstmt3 != null) {
+						JdbcUtil.close(pstmt3);
+					}
+				}
+		
 		
 	}
 

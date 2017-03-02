@@ -64,7 +64,7 @@ public class Datasend_NHIStoLINK extends HttpServlet {
 		
 		
 		
-		ArrayList<String> arrayList = new ArrayList<String>();
+//		ArrayList<String> arrayList = new ArrayList<String>();
 		
 //		// 전체 DB명 가져오기
 //		
@@ -134,7 +134,7 @@ public class Datasend_NHIStoLINK extends HttpServlet {
 
 			con2 = JdbcUtil.getConnection();
 
-			String sql = "INSERT INTO link_take_nhis."+nhisID+"_"+tableName+" select nhis_take_link."+nhisID+"_"+tableName+".linkID, nhis.nhis_data.STND_Y, nhis.nhis_data.YKIHO_ID, nhis.nhis_data.YKIHO_GUBUN_CD, nhis.nhis_data.ORG_TYPE, nhis.nhis_data.YKIHO_SIDO, nhis.nhis_data.SICKBED_CNT,nhis.nhis_data.DR_CNT, nhis.nhis_data.CT_YN, nhis.nhis_data.MRI_YN, nhis.nhis_data.PET_YN FROM nhis_take_link.nhistest_rtest_upload_sample INNER JOIN nhis.nhis_data ON nhis_take_link."+nhisID+"_"+tableName+".nhisID = nhis.nhis_data.nhis_ID";
+			String sql = "INSERT INTO link_take_nhis."+nhisID+"_"+tableName+" select nhis_take_link."+nhisID+"_"+tableName+".linkID, nhis.nhis_data.STND_Y, nhis.nhis_data.YKIHO_ID, nhis.nhis_data.YKIHO_GUBUN_CD, nhis.nhis_data.ORG_TYPE, nhis.nhis_data.YKIHO_SIDO, nhis.nhis_data.SICKBED_CNT,nhis.nhis_data.DR_CNT, nhis.nhis_data.CT_YN, nhis.nhis_data.MRI_YN, nhis.nhis_data.PET_YN FROM nhis_take_link."+nhisID+"_"+tableName+" INNER JOIN nhis.nhis_data ON nhis_take_link."+nhisID+"_"+tableName+".nhisID = nhis.nhis_data.nhis_ID";
 
 			pstmt2 = con2.prepareStatement(sql);
 			pstmt2.executeUpdate();
@@ -179,6 +179,62 @@ public class Datasend_NHIStoLINK extends HttpServlet {
 				JdbcUtil.close(pstmt3);
 			}
 		}
+		
+		
+		// link_take_checklist.link_take_checklist_info 에 데이터 보내준 nhisID 입력
+		
+				try {
+
+					con3 = JdbcUtil.getConnection();
+
+					System.out.println("(2)nhis DB connect success");
+
+					String sql = "UPDATE link_take_checklist.link_take_checklist_info set data_nhisID = '"+nhisID+"' where nhisTableName = '" + tableName + "'";
+
+					pstmt3 = con3.prepareStatement(sql);
+					pstmt3.executeUpdate();
+					
+					System.out.println("데이터 전송해준 nhisID 입력");
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					if (con3 != null) {
+						JdbcUtil.close(con3);
+					}
+					if (pstmt3 != null) {
+						JdbcUtil.close(pstmt3);
+					}
+				}
+				
+				
+				// link_take_checklist.link_take_checklist_info 에 nhis_receive 1로 변경
+				
+				try {
+
+					con3 = JdbcUtil.getConnection();
+
+					System.out.println("(3)nhis DB connect success");
+
+					String sql = "UPDATE link_take_checklist.link_take_checklist_info set nhis_receive = 1 where nhisTableName = '" + tableName + "'";
+
+					pstmt3 = con3.prepareStatement(sql);
+					pstmt3.executeUpdate();
+					
+					System.out.println("nhis_receive 1로 변경");
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					if (con3 != null) {
+						JdbcUtil.close(con3);
+					}
+					if (pstmt3 != null) {
+						JdbcUtil.close(pstmt3);
+					}
+				}
+		
+				
 		
 	}
 

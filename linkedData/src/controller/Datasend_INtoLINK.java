@@ -17,7 +17,7 @@ import db.JdbcUtil;
 /**
  * Servlet implementation class datasend_IntoLINK
  */
-@WebServlet("/J_IN/datasend_IntoLINK")
+@WebServlet("/J_IN/datasend_INtoLINK")
 public class Datasend_INtoLINK extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -126,7 +126,7 @@ public class Datasend_INtoLINK extends HttpServlet {
 
 				con3 = JdbcUtil.getConnection();
 
-				String sql = "INSERT INTO "+nhisID+"_"+nhisTableName+"_"+statID+"_"+statTableName+"(linkID, nhisID, statID) SELECT * FROM indexer_checklist."+nhisID+"_"+nhisTableName+"_"+statID+"_"+statTableName;
+				String sql = "INSERT INTO link_take_checklist."+nhisID+"_"+nhisTableName+"_"+statID+"_"+statTableName+"(linkID, nhisID, statID) SELECT * FROM indexer_checklist."+nhisID+"_"+nhisTableName+"_"+statID+"_"+statTableName;
 
 				pstmt3 = con3.prepareStatement(sql);
 				pstmt3.executeUpdate();
@@ -152,13 +152,18 @@ public class Datasend_INtoLINK extends HttpServlet {
 
 				con4 = JdbcUtil.getConnection();
 
-				String sql = "INSERT INTO link_take_checklist.link_take_checklist_info(indexerID, indexerName, tableName) VALUES(?,?,?)";
+				String sql = "INSERT INTO link_take_checklist.link_take_checklist_info(indexerID, indexerName, checklist_tableName, nhisID, nhisTableName, statID, statTableName) VALUES(?,?,?,?,?,?,?)";
 
 				pstmt4 = con4.prepareStatement(sql);
 				
 				pstmt4.setString(1, inID);
 				pstmt4.setString(2, inName);
 				pstmt4.setString(3, nhisID+"_"+nhisTableName+"_"+statID+"_"+statTableName);
+				pstmt4.setString(4, nhisID);
+				pstmt4.setString(5, nhisTableName);
+				pstmt4.setString(6, statID);
+				pstmt4.setString(7, statTableName);
+				
 				
 				pstmt4.executeUpdate();
 				

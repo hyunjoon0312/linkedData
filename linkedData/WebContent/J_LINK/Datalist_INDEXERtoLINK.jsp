@@ -27,6 +27,8 @@
 		Statement stmt1 = null;
 		ResultSet rs1 = null;
 		
+		System.err.println("/J_LINK/Datalist_INDEXERtoLINK");
+		
 		
 		try {
 			stmt1 = conn1.createStatement();
@@ -45,7 +47,7 @@
 
 				<table border="1" cellspacing="0">
 					<tr>
-						<th>전송 시간</th>
+						<th>대조표 전송 시간</th>
 						<th>대조표 전송자 ID</th>
 						<th>대조표 전송자 이름</th>
 						<th>NHIS 데이터</th>
@@ -58,11 +60,15 @@
 								String indexerID = rs1.getString(2);
 								String indexerName = rs1.getString(3);
 								String tableName = rs1.getString(4);
-								int nhis_receive = rs1.getInt(5);
-								int stat_receive = rs1.getInt(6);
-								int data_link = rs1.getInt(7);
-								String nhisID = rs1.getString(8);
-								String statID = rs1.getString(9);
+								String nhisID = rs1.getString(5);
+								String nhisTableName = rs1.getString(6);
+								String statID = rs1.getString(7);
+								String statTableName = rs1.getString(8);
+								String data_nhisID = rs1.getString(9);
+								String data_statID = rs1.getString(10);
+								int nhis_receive = rs1.getInt(11);
+								int stat_receive = rs1.getInt(12);
+								int data_link = rs1.getInt(13);
 								
 					%>
 
@@ -71,8 +77,10 @@
 						<td><%=indexerID%></td>
 						<td><%=indexerName%></td>
 
-						<form action="./J_LINK/data_nhis.jsp_" method="POST">
-							<input type="hidden" name="nhisID" value="<%=nhisID%>" />
+						<form action="./Data_nhis.jsp" method="POST">
+							<input type="hidden" name="data_nhisID" value="<%=data_nhisID%>" />
+							<input type="hidden" name="nhisTableName" value="<%=nhisTableName%>" />
+							<input type="hidden" name="requestTime" value="<%=requestTime%>" />
 
 							<%
 								if (nhis_receive == 1) {
@@ -81,7 +89,7 @@
 							<%
 								} else {
 							%>
-							<td><input type="submit" value="데이터 없음" disabled="disabled" /></td>
+							<td><input type="submit" value="데이터 전송 전" disabled="disabled" /></td>
 							<%
 								}
 							%>
@@ -89,8 +97,10 @@
 
 
 
-						<form action="./J_LINK/data_nhis.jsp_" method="POST">
-							<input type="hidden" name="statID" value="<%=statID%>" />
+						<form action="./Data_stat.jsp" method="POST">
+							<input type="hidden" name="data_statID" value="<%=data_statID%>" />
+							<input type="hidden" name="statTableName" value="<%=statTableName%>" />
+							<input type="hidden" name="requestTime" value="<%=requestTime%>" />
 
 							<%
 								if (stat_receive == 1) {
@@ -99,33 +109,42 @@
 							<%
 								} else {
 							%>
-							<td><input type="submit" value="데이터 없음" disabled="disabled" /></td>
+							<td><input type="submit" value="데이터 전송 전" disabled="disabled" /></td>
 							<%
 								}
 							%>
 						</form>
 
 					
-						// 데이터 연계
+						<!-- 데이터 연계 -->
 
 						<form action="data_link" method="POST">
-							<input type="hidden" name="tableName" value="<%=tableName%>" />
+							<input type="hidden" name="nhisTableName" value="<%=nhisTableName%>" />
+							<input type="hidden" name="nhisID" value="<%=nhisID%>" />
+							<input type="hidden" name="statTableName" value="<%=statTableName%>" />
+							<input type="hidden" name="statID" value="<%=statID%>" />
 
 							<%
-								if (nhis_receive == 1 && stat_receive == 1) {
+								if (nhis_receive == 1 && stat_receive == 1 && data_link == 0) {
 							%>
 							<td><input type="submit" value="데이터연계" /></td>
 							<%
-								} else if(nhis_receive == 1 && stat_receive == 0){
+								} else if(nhis_receive == 1 && stat_receive == 0 && data_link == 0){
 							%>
-							<td><input type="submit" value="STAT 데이터 없음" disabled="disabled" /></td>
+							<td><input type="submit" value="STAT 데이터 전송 전" disabled="disabled" /></td>
 							<%
-								} else if(nhis_receive == 0 && stat_receive == 1){
+								} else if(nhis_receive == 0 && stat_receive == 1 && data_link == 0){
 								%>
-							<td><input type="submit" value="NHIS 데이터 없음" disabled="disabled" /></td>
+							<td><input type="submit" value="NHIS 데이터 전송 전" disabled="disabled" /></td>
 								<%	
-								}
+								} else if(nhis_receive == 1 && stat_receive == 1 && data_link == 1){
 							%>
+							<td><input type="submit" value="데이터 연계 완료" disabled="disabled" /></td>
+							<%
+							} else{ 				
+							%>
+							<td><input type="submit" value="기관 데이터 전송 전" disabled="disabled" /></td>
+							<%} %>
 						</form>
 
 
