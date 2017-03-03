@@ -1,4 +1,4 @@
-<%@page import="vo.MemberSTAT"%>
+<%@page import="vo.MemberNHIS"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -8,13 +8,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-NECA INDEXER에 통계청 기관 식별자 전송완료
 
-<%	String STATid = ((MemberSTAT)request.getSession().getAttribute("STATid")).getSTATId();
+<%
+String NHISid = ((MemberNHIS)request.getSession().getAttribute("NHISid")).getNHISId();
 %>
 
 
-	<script type="text/javascript">  
+LINK에게 데이터 전송완료
+
+<script type="text/javascript">  
     var ws = new WebSocket("ws://localhost:8080/linkedData/websocket");
 	
        if ("WebSocket" in window)
@@ -24,7 +26,7 @@ NECA INDEXER에 통계청 기관 식별자 전송완료
           ws.onopen = function()
           {
              // Web Socket is connected, send data using send()
-             ws.send("건강보험공단("+STATid+") NECA IDEXER로 기관 식별자 전송..." + "\n");
+             ws.send("NHIS("+NHISid+") 연계플랫폼으로 데이터 전송..." + "\n");
 			};
 
 			ws.onmessage = function(evt) {
@@ -47,8 +49,7 @@ NECA INDEXER에 통계청 기관 식별자 전송완료
 			ws.send("123");
 		}
 	</script>
-	
-		<input type="button" name="back" value="뒤로가기" onclick="javascript:location.href='./Datalist_NEOKtoSTAT.jsp';"/>
+	<input type="button" name="back" value="뒤로가기" onclick="javascript:location.href='./Datalist_NEOKtoNHIS.jsp';"/>
 
 </body>
 </html>

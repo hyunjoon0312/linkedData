@@ -8,13 +8,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-NECA INDEXER에 통계청 기관 식별자 전송완료
 
-<%	String STATid = ((MemberSTAT)request.getSession().getAttribute("STATid")).getSTATId();
+LINK에게 데이터 전송 완료
+
+<%
+String STATid = ((MemberSTAT)request.getSession().getAttribute("STATid")).getSTATId();
 %>
 
 
-	<script type="text/javascript">  
+
+<script type="text/javascript">  
     var ws = new WebSocket("ws://localhost:8080/linkedData/websocket");
 	
        if ("WebSocket" in window)
@@ -24,7 +27,7 @@ NECA INDEXER에 통계청 기관 식별자 전송완료
           ws.onopen = function()
           {
              // Web Socket is connected, send data using send()
-             ws.send("건강보험공단("+STATid+") NECA IDEXER로 기관 식별자 전송..." + "\n");
+             ws.send("STAT("+STATid+") 연계플랫폼으로 데이터 전송..." + "\n");
 			};
 
 			ws.onmessage = function(evt) {
@@ -48,7 +51,6 @@ NECA INDEXER에 통계청 기관 식별자 전송완료
 		}
 	</script>
 	
-		<input type="button" name="back" value="뒤로가기" onclick="javascript:location.href='./Datalist_NEOKtoSTAT.jsp';"/>
-
+	<input type="button" name="back" value="뒤로가기" onclick="javascript:location.href='./Datalist_NEOKtoSTAT.jsp';"/>
 </body>
 </html>

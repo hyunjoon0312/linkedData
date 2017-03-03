@@ -10,5 +10,8 @@
 
 연계기관 대조표 전송 완료.
 
+	<input type="button" name="back" value="뒤로가기" onclick="javascript:location.href='./Datalist_ORGtoINDEXER.jsp';"/>
+
+
 </body>
 </html>

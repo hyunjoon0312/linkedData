@@ -81,5 +81,8 @@ if(stat_send == 0){
     }
  
     </script>
+    
+    	<input type="button" name="back" value="뒤로가기" onclick="javascript:location.href='./Datalist_RtoNEOK.jsp';"/>
+    
 </body>
 </html>

@@ -123,5 +123,7 @@
 %>
 
 
+	<input type="button" name="back" value="뒤로가기" onclick="javascript:location.href='./Datalist_INDEXERtoLINK.jsp';"/>
+
 </body>
 </html>

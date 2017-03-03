@@ -48,5 +48,8 @@ NECA INDEXER에 NHIS 기관 식별자 전송완료
 		}
 	</script>
 
+
+	<input type="button" name="back" value="뒤로가기" onclick="javascript:location.href='./Datalist_NEOKtoNHIS.jsp';"/>
+
 </body>
 </html>

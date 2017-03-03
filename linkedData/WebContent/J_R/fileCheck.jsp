@@ -16,5 +16,7 @@ ID : <%=id %></br>
 연구자 : <%=name %><br>
 제목 : <%=subject %><br>
 파일명 : <a href="file_down.jsp?file_name=<%=filename %>"><%=origfilename %></a><br>
+
+	<input type="button" name="moreUpload" value="더 업로드 하기" onclick="javascript:location.href='./DataRequestForm.jsp';"/>
 </body>
 </html>

@@ -22,9 +22,13 @@ public class websocket {
 //        broadcast("connect");
     }
 
+    
+    
+    
     @OnClose
     public void onClose(Session userSession) {
         userSessions.remove(userSession);
+        
     }
 
     @OnMessage

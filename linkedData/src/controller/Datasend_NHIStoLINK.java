@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -234,6 +235,10 @@ public class Datasend_NHIStoLINK extends HttpServlet {
 					}
 				}
 		
+				
+				RequestDispatcher rd = request.getRequestDispatcher("/J_NHIS/datasend_result_link.jsp");
+				rd.forward(request, response);
+				
 				
 		
 	}

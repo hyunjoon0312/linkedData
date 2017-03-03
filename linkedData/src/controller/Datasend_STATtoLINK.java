@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -235,6 +236,12 @@ public class Datasend_STATtoLINK extends HttpServlet {
 					}
 				}
 		
+				
+				
+				RequestDispatcher rd = request.getRequestDispatcher("/J_STAT/datasend_result_link.jsp");
+				rd.forward(request, response);
+				
+				
 		
 	}
 

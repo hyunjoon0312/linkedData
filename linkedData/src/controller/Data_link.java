@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -142,6 +143,11 @@ public class Data_link extends HttpServlet {
 				JdbcUtil.close(pstmt3);
 			}
 		}
+		
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/J_LINK/data_link_result.jsp");
+		rd.forward(request, response);
+		
 		
 		
 	}
