@@ -6,19 +6,20 @@
 <title>상태 확인창</title>
 
 </head>
+
+<style type="text/css">
+
+#center {
+width:50px; height:50px;  display:inline-block; }
+
+
+</style>
 <body>
-<h3>상태확인창</h3>
-<!--     <form>
-        송신 메시지 작성하는 창
-        <input id="textMessage" type="text">
-        송신 버튼
-        <input onclick="sendMessage()" value="Send" type="button">
-        종료 버튼
-        <input onclick="disconnect()" value="Disconnect" type="button">
-    </form> -->
+<h2 align="center">상태확인창</h2>
+
     <br />
-    <!-- 결과 메시지 보여주는 창 -->
-    <textarea id="messageTextArea" rows="30" cols="80"></textarea>
+    
+    <textarea id="messageTextArea" rows="30" cols="80" ></textarea>
      
     <script type="text/javascript">  
     var ws = new WebSocket("ws://localhost:8080/linkedData/websocket");

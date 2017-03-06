@@ -97,7 +97,7 @@ ArrayList<String> readList = new ArrayList<String>();
 	IntNhis = Integer.parseInt(nhis);
 	IntStat = Integer.parseInt(stat);
 
-	String infosql = "insert into UploadFileInfo values(default,?,?,?,?,?,?,?,?,?,?,?)";        // sql 쿼리
+	String infosql = "insert into UploadFileInfo values(default,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";        // sql 쿼리
 	pstmt1 = con.prepareStatement(infosql);                          // prepareStatement에서 해당 sql을 미리 컴파일한다.
 	pstmt1.setString(1,subject);
 	pstmt1.setString(2,filename);
@@ -110,6 +110,9 @@ ArrayList<String> readList = new ArrayList<String>();
 	pstmt1.setInt(9, 0);
 	pstmt1.setInt(10, 0);
 	pstmt1.setInt(11, 0);
+	pstmt1.setInt(12, 0);
+	pstmt1.setString(13, "");
+	pstmt1.setString(14, id+"_"+filename);
 	
 	//pstmt.setTimestamp(4, new Timestamp(System.currentTimeMillis()));    // 현재 날짜와 시간
 

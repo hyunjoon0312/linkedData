@@ -153,7 +153,7 @@ public class Data_link extends HttpServlet {
 
 			System.out.println("(1)uploadFile DB connect success");
 
-			String sql = "UPDATE uploadFile.UploadFileInfo set data_link = 1 where filename= '"+nhisTableName+ "'";
+			String sql = "UPDATE uploadFile.UploadFileInfo set data_link = 1 where id_filename= '"+nhisTableName+ ".csv'";
 
 			pstmt3 = con3.prepareStatement(sql);
 			pstmt3.executeUpdate();
@@ -175,17 +175,21 @@ public class Data_link extends HttpServlet {
 		// uploadFile.UploadgFileInfo 에도 연계 데이터 테이블 이름 저장
 		
 				try {
-
+					
+					
+					
 					con3 = JdbcUtil.getConnection();
 
 					System.out.println("(2)uploadFile DB connect success");
 
-					String sql = "UPDATE uploadFile.UploadFileInfo set link_data_tablename = "+nhisID+"_"+nhisTableName+"_"+statID+"_"+statTableName+" where filename= '"+nhisTableName+ "'";
+					String sql = "UPDATE uploadFile.UploadFileInfo set link_data_tablename = '"+nhisID+"_"+nhisTableName+"_"+statID+"_"+statTableName+"' where id_filename= '"+nhisTableName+ ".csv'";
 
+					System.err.println("테이블 이름 : "+nhisTableName);
+					
 					pstmt3 = con3.prepareStatement(sql);
 					pstmt3.executeUpdate();
 					
-					System.out.println("연계 데이터 테이블 이름 : "+nhisID+"_"+nhisTableName+"_"+statID+"_"+statTableName+" where filename= '"+nhisTableName);
+					System.out.println("연계 데이터 테이블 이름 : "+nhisID+"_"+nhisTableName+"_"+statID+"_"+statTableName+" where id_filename= '"+nhisTableName);
 
 				} catch (Exception e) {
 					e.printStackTrace();
