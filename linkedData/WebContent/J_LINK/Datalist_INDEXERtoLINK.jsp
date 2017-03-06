@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>연계플랫폼 데이터 목록</title>
 </head>
 <body>
 	<%
@@ -39,7 +39,9 @@
 			System.out.println("(1)stmt1");
 
 	%>
-	<table border="0">
+<h1 align="center">데이터 연계플랫폼 데이터 목록</h1><br>
+
+		<table id = "tb" border="1" cellspacing="0" style="margin:0 auto; text-align :center;">
 		<tr>
 
 			<!-- ---------- link가 받은 데이터 info ----------- -->

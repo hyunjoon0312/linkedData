@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>데이터목록</title>
 </head>
 <body>
 	<%
@@ -119,13 +119,18 @@
 			System.out.println("(4)stmt4");
 
 	%>
-	<table border="0">
+<h1 align="center">NECA INDEXER 데이터 목록</h1><br>
+			<table id = "tb" border="1" cellspacing="0" style="margin:0 auto; text-align :center;">
+	
 		<tr>
 
 			<!-- ---------- indexer가 받은 데이터 info ----------- -->
 			<td>
 
-				<table border="1" cellspacing="0">
+
+			<table border="1">
+		
+		
 					<tr>
 						<th>순서</th>
 						<th>NHIS 요청 시간</th>

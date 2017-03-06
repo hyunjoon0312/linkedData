@@ -145,6 +145,61 @@ public class Data_link extends HttpServlet {
 		}
 		
 		
+		// uploadFile.UploadgFileInfo 에도 데이터 연계 했다고 알려줌.
+		
+		try {
+
+			con3 = JdbcUtil.getConnection();
+
+			System.out.println("(1)uploadFile DB connect success");
+
+			String sql = "UPDATE uploadFile.UploadFileInfo set data_link = 1 where filename= '"+nhisTableName+ "'";
+
+			pstmt3 = con3.prepareStatement(sql);
+			pstmt3.executeUpdate();
+			
+			System.out.println("data_link 1로 변경");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (con3 != null) {
+				JdbcUtil.close(con3);
+			}
+			if (pstmt3 != null) {
+				JdbcUtil.close(pstmt3);
+			}
+		}
+		
+		
+		// uploadFile.UploadgFileInfo 에도 연계 데이터 테이블 이름 저장
+		
+				try {
+
+					con3 = JdbcUtil.getConnection();
+
+					System.out.println("(2)uploadFile DB connect success");
+
+					String sql = "UPDATE uploadFile.UploadFileInfo set link_data_tablename = "+nhisID+"_"+nhisTableName+"_"+statID+"_"+statTableName+" where filename= '"+nhisTableName+ "'";
+
+					pstmt3 = con3.prepareStatement(sql);
+					pstmt3.executeUpdate();
+					
+					System.out.println("연계 데이터 테이블 이름 : "+nhisID+"_"+nhisTableName+"_"+statID+"_"+statTableName+" where filename= '"+nhisTableName);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					if (con3 != null) {
+						JdbcUtil.close(con3);
+					}
+					if (pstmt3 != null) {
+						JdbcUtil.close(pstmt3);
+					}
+				}
+		
+		
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/J_LINK/data_link_result.jsp");
 		rd.forward(request, response);
 		

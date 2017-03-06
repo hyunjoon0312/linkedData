@@ -13,10 +13,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>건보공단 로그인</title>
 </head>
 <body>
-건강보험공단 로그인 성공 <br>
+<h1>건강보험공 로그인 성공<br></h1><br>
+
+<ul>
+<li><h2><a href = "./Datalist_NEOKtoNHIS.jsp">데이터 요청 목록</a></h2></li>
+</ul>
+
+
+	<br>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+	<input type="button" name="back" value="로그아웃"
+		onclick="javascript:location.href='./sessionLogoutNHIS.jsp';" />
+
 
       <script type="text/javascript">  
     var ws = new WebSocket("ws://localhost:8080/linkedData/websocket");
@@ -28,7 +38,7 @@
           ws.onopen = function()
           {
              // Web Socket is connected, send data using send()
-             ws.send("<%=NHISname%>님(건보공단) 로그인..."+"\n");
+             ws.send("<%=NHISname%>님(건보공단) 로그인"+"\n");
           };
 			
           ws.onmessage = function (evt) 
@@ -55,8 +65,6 @@
     }
  
     </script>
-    
-<a href = "/linkedData/J_NHIS/Datalist_NEOKtoNHIS.jsp">데이터 요청 목록</a>   <br> 
-<a href = "/linkedData/J_NHIS/sessionLogoutNHIS.jsp">로그아웃</a>
+
 </body>
 </html>

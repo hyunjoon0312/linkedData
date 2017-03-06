@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>통계청 데이터 요청 결과</title>
 </head>
 <body>
 
@@ -27,21 +27,9 @@ int stat_send = Integer.parseInt(str_stat_send);
 if(stat_send == 0){
 %>
 
-통계청으로 <%=uploadername %> 연구자가 요청한 데이터 전송 성공<br/>
+<h1>통계청으로 <%=uploadername %> 연구자가 요청한 데이터 전송 성공<br/></h1>
 
-<%}else{ %>
-
-이미 전송한 데이터 입니다.
-
-<%} %>
-
-
-
-
-
-
-
-
+<input type="button" name="back" value="뒤로가기" onclick="javascript:location.href='./Datalist_RtoNEOK.jsp';"/>
 
 
   <script type="text/javascript">  
@@ -54,7 +42,7 @@ if(stat_send == 0){
           ws.onopen = function()
           {
              // Web Socket is connected, send data using send()
-             ws.send("NECA승인처(<%=NEOKid%>) : <%=uploadername%>연구자 요청한 식별자 통계청 전송..."+"\n");
+             ws.send("NECA승인처(<%=NEOKid%>) : <%=uploadername%>연구자 요청한 식별자 통계청 전송"+"\n");
           };
 			
           ws.onmessage = function (evt) 
@@ -81,8 +69,22 @@ if(stat_send == 0){
     }
  
     </script>
+
+
+<%}else{ %>
+
+<h1>이미 전송한 데이터 입니다.<br></h1>
+
+<input type="button" name="back" value="뒤로가기" onclick="javascript:location.href='./Datalist_RtoNEOK.jsp';"/>
+
+
+<%} %>
+
+
+
+
     
-    	<input type="button" name="back" value="뒤로가기" onclick="javascript:location.href='./Datalist_RtoNEOK.jsp';"/>
+    	
     
 </body>
 </html>

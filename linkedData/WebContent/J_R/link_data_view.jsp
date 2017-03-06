@@ -1,41 +1,28 @@
-<%@page import="java.util.Date"%>
-<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="db.JdbcUtil"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Í±¥Î≥¥Í≥µÎã® Îç∞Ïù¥ÌÑ∞ Î≥¥Í∏∞</title>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>ø¨∞Ëµ•¿Ã≈Õ »Æ¿Œ</title>
 </head>
 <body>
 
-
-
 <%
-		System.err.println("/J_LINK/Data_nhis.jsp");
+		System.err.println("/J_R/link_data_view.jsp");
 
+	
 
-		String nhisID = request.getParameter("data_nhisID");
-		String tableName = request.getParameter("nhisTableName");
-		String str_requestTime = request.getParameter("requestTime");
-
-		
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date date_time = format.parse(str_requestTime);
-		String requestTime = (String)format.format(date_time);
-
-
-		
+		String link_data_tablename = request.getParameter("link_data_tablename");
 		
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-	
+		
 		
 		
 		
@@ -45,7 +32,7 @@
 			
 			stmt = con.createStatement();
 
-			String query = "select * from link_take_nhis."+nhisID+"_"+tableName;
+			String query = "select * from link_safe_DB."+link_data_tablename;
 			rs = stmt.executeQuery(query);
 			
 			System.out.println("(1)stmt");
@@ -54,8 +41,6 @@
 			
 	%>
 	
-	<h2 align="center">Îç∞Ïù¥ÌÑ∞ Ï†ÑÏÜ° ÏãúÍ∞Ñ : <%=requestTime %></h2>
-	<h2 align="center">Îç∞Ïù¥ÌÑ∞ Ï†ÑÏÜ°Ïûê ID: <%=nhisID %></h2><br>
 	
 	<table id = "tb" border="1" cellspacing="0" style="margin:0 auto; text-align :center;">
 	
@@ -63,12 +48,11 @@
 	
 		<tr>
 
-			<!-- ---------- linkÍ∞Ä Î∞õÏùÄ nhis Îç∞Ïù¥ÌÑ∞ ----------- -->
 			<td>
 
 				<table border="1" cellspacing="0">
 					<tr>
-						<th>Ïó∞Í≤∞ Î≤àÌò∏</th>
+						<th>π¯»£</th>
 						<th>STND_Y</th>
 						<th>YKIHO_ID</th>
 						<th>YKIHO_GUBUN_CD</th>
@@ -79,9 +63,21 @@
 						<th>CY_YN</th>
 						<th>MRI_YN</th>
 						<th>PER_YN</th>
+						<th>REPORT_YMD</th>
+						<th>ADDRESS</th>
+						<th>GENDER</th>
+						<th>DEATH_YMD</th>
+						<th>DEATH_TIME</th>
+						<th>DEATH_PLACE</th>
+						<th>DEATH_JOB</th>
+						<th>MARRY</th>
+						<th>EDU</th>
+						<th>DEATH_CAU1</th>
+						<th>DEATH_CAU1_Parent</th>
+						<th>DEATH_AGE</th>
 					</tr>
 					<%
-						while (rs.next()) { //rs Î•º ÌÜµÌï¥ ÌÖåÏù¥Î∏î Í∞ùÏ≤¥Îì§Ïùò ÌïÑÎìúÍ∞íÏùÑ ÎÑòÍ≤®Î≥º Ïàò ÏûàÎã§.
+						while (rs.next()) { //rs ∏¶ ≈Î«ÿ ≈◊¿Ã∫Ì ∞¥√ºµÈ¿« « µÂ∞™¿ª ≥—∞‹∫º ºˆ ¿÷¥Ÿ.
 								
 								
 							
@@ -100,6 +96,18 @@
 						<td><%=rs.getInt(9) %></td>
 						<td><%=rs.getInt(10) %></td>
 						<td><%=rs.getInt(11) %></td>
+						<td><%=rs.getString(12)%></td>
+						<td><%=rs.getInt(13)%></td>
+						<td><%=rs.getInt(14)%></td>
+						<td><%=rs.getString(15)%></td>
+						<td><%=rs.getInt(16)%></td>
+						<td><%=rs.getInt(17)%></td>
+						<td><%=rs.getString(18)%></td>
+						<td><%=rs.getInt(19)%></td>
+						<td><%=rs.getInt(20)%></td>
+						<td><%=rs.getString(21)%></td>
+						<td><%=rs.getString(22)%></td>
+						<td><%=rs.getInt(23)%></td>
 					
 
 
@@ -130,7 +138,10 @@
 </td>
 </tr>
 </table>
-	<br><center><input type="button" name="back" value="Îí§Î°úÍ∞ÄÍ∏∞" onclick="javascript:location.href='./Datalist_INDEXERtoLINK.jsp';"/></center>
+	<br><center><input type="button" name="back" value="µ⁄∑Œ∞°±‚" onclick="javascript:location.href='./Request_list.jsp';"/></center>
+
+
+
 
 </body>
 </html>

@@ -4,12 +4,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>NECA INDEXER 로그인</title>
 </head>
 <body>
 
-NECA INDEXER 로그인 성공
-<a href = "sessionLogoutIN.jsp">로그아웃</a>
+
+<h1>NECA INDEXER 로그인 성공<br/></h1><br>
+<ul>
+<li><h2><a href = "/linkedData/J_IN/Datalist_ORGtoINDEXER.jsp">데이터목록</a></h2></li>
+</ul>
+
+	<br>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+	<input type="button" name="back" value="로그아웃"
+		onclick="javascript:location.href='./sessionLogoutIN.jsp';" />
 
 
 </body>

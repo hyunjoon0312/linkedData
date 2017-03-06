@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>통계청 데이터 보기</title>
 </head>
 <body>
 
@@ -50,8 +50,12 @@
 
 	%>
 	
-	<h2>데이터 전송 시간 : <%=requestTime %></h2><br>
-	<h2>데이터 전송자 ID: <%=statID %></h2><br>
+	<h2 align="center">데이터 전송 시간 : <%=requestTime %></h2>
+	<h2 align="center">데이터 전송자 ID: <%=statID %></h2><br>
+	
+		<table id = "tb" border="1" cellspacing="0" style="margin:0 auto; text-align :center;">
+	<tr>
+	<td>
 	
 	<table border="0">
 		<tr>
@@ -123,7 +127,13 @@
 %>
 
 
-	<input type="button" name="back" value="뒤로가기" onclick="javascript:location.href='./Datalist_INDEXERtoLINK.jsp';"/>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+	<br><center><input type="button" name="back" value="뒤로가기" onclick="javascript:location.href='./Datalist_INDEXERtoLINK.jsp';"/></center>
 
 </body>
 </html>

@@ -1,17 +1,19 @@
 <%@page import="vo.MemberNHIS"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%	String NHISid = ((MemberNHIS)request.getSession().getAttribute("NHISid")).getNHISId();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>전송결과</title>
 </head>
 <body>
-NECA INDEXER에 NHIS 기관 식별자 전송완료
+<h1>NECA INDEXER에 NHIS 기관 식별자 전송완료</h1>
+<input type="button" name="back" value="뒤로가기" onclick="javascript:location.href='./Datalist_NEOKtoNHIS.jsp';"/>
 
-<%	String NHISid = ((MemberNHIS)request.getSession().getAttribute("NHISid")).getNHISId();
-%>
+
 
 
 	<script type="text/javascript">  
@@ -24,7 +26,7 @@ NECA INDEXER에 NHIS 기관 식별자 전송완료
           ws.onopen = function()
           {
              // Web Socket is connected, send data using send()
-             ws.send("NHIS("+NHISid+") NECA IDEXER로 기관 식별자 전송..." + "\n");
+             ws.send("NHIS(<%=NHISid%>) : NECA IDEXER로 기관 식별자 전송" + "\n");
 			};
 
 			ws.onmessage = function(evt) {
@@ -49,7 +51,6 @@ NECA INDEXER에 NHIS 기관 식별자 전송완료
 	</script>
 
 
-	<input type="button" name="back" value="뒤로가기" onclick="javascript:location.href='./Datalist_NEOKtoNHIS.jsp';"/>
 
 </body>
 </html>

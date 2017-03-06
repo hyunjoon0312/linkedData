@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>전송 결과</title>
 </head>
 <body>
 
-LINK에게 데이터 전송 완료
+<h1>연계플랫폼으로 데이터 전송 완료</h1><br><br>
 
 <%
 String STATid = ((MemberSTAT)request.getSession().getAttribute("STATid")).getSTATId();
@@ -27,7 +27,7 @@ String STATid = ((MemberSTAT)request.getSession().getAttribute("STATid")).getSTA
           ws.onopen = function()
           {
              // Web Socket is connected, send data using send()
-             ws.send("STAT("+STATid+") 연계플랫폼으로 데이터 전송..." + "\n");
+             ws.send("STAT(<%=STATid%>) : 연계플랫폼으로 데이터 전송" + "\n");
 			};
 
 			ws.onmessage = function(evt) {

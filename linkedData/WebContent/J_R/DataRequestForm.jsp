@@ -12,6 +12,7 @@
 <html>
 <head>
 <title>연계 데이터 요청</title>
+<br><br><br><br><br>
 <style>
 	#uploadFormArea{
 		margin : auto;
@@ -30,7 +31,11 @@
 
 <table>
 	<tr>
-		<td colspan="2" class = "td_title" >연계 데이터 요청</td></tr></br>
+		<td colspan="2" class = "td_title" >연계 데이터 요청</td>
+	</tr>
+	<tr>
+		<td colspan="2" ><br></td>
+	</tr>
 	<tr>
 		<td>연구자 ID :</td><td><%=Rid %></td>
 		<input type="hidden" name="id" value="<%=Rid %>"/>
@@ -45,15 +50,17 @@
 	<tr>
 		<td><label for = "fileName">파일명1 : </label></td><td><input type="file" name="fileName" id = "fileName"></td>
 	</tr>
-
-<tr>
-		<td>연계 희망 기관</td>
-</tr>
-<tr>
-		<td><input type="checkbox" name="nhis" value="1" /> 건강보험공단 </td>
+	<tr>
+			<td colspan="2"><br></td>
 	</tr>
 	<tr>
-		<td><input type="checkbox" name="stat" value="1" /> 통계청</td>
+			<td colspan="2">연계 희망 기관</td>
+	</tr>
+	<tr>
+		<td colspan="2"><input type="checkbox" name="nhis" value="1" /> 건강보험공단 </td>
+	</tr>
+	<tr>
+		<td colspan="2"><input type="checkbox" name="stat" value="1" /> 통계청</td>
 	</tr>
 	<tr>
 		<td colspan=2 align=center><input type="submit" value="전송"></td>

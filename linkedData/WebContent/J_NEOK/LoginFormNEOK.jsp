@@ -78,7 +78,7 @@
 	</section>
 <%
 	}else{
-		response.sendRedirect("AfterLoginNEOK.jsp");}
+		response.sendRedirect("./AfterLoginNEOK.jsp");}
 %>
 
 

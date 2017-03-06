@@ -12,10 +12,9 @@ String LINKname = ((MemberLINK)request.getSession().getAttribute("LINKid")).getL
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>연계플랫폼 로그인</title>
 </head>
 <body>
-연계 데이터 플랫폼 로그인 성공<br/>
 
     <script type="text/javascript">  
     var ws = new WebSocket("ws://localhost:8080/linkedData/websocket");
@@ -27,7 +26,7 @@ String LINKname = ((MemberLINK)request.getSession().getAttribute("LINKid")).getL
           ws.onopen = function()
           {
              // Web Socket is connected, send data using send()
-             ws.send("<%=LINKname%>님(데이터연계플랫폼) 로그인..."+"\n");
+             ws.send("<%=LINKname%>님(데이터연계플랫폼) 로그인"+"\n");
           };
 			
           ws.onmessage = function (evt) 
@@ -56,8 +55,16 @@ String LINKname = ((MemberLINK)request.getSession().getAttribute("LINKid")).getL
     </script>
     <!-- <input type="submit" value="send" onclick="send()" /> -->
  
+ <h1>데이터 연계플랫폼 로그인 성공<br/></h1><br>
  
-<a href = "./Datalist_INDEXERtoLINK.jsp">대조표 목록</a> <br>
-<a href = "./sessionLogoutLINK.jsp">로그아웃</a>
+ <ul>
+<li><h2><a href = "./Datalist_INDEXERtoLINK.jsp">대조표 목록</a></h2></li>
+ </ul>
+ 
+ 
+	<br>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+	<input type="button" name="back" value="로그아웃"
+		onclick="javascript:location.href='./sessionLogoutLINK.jsp';" />
+ 
 </body>
 </html>

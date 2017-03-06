@@ -5,15 +5,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>건보공단 로그인</title>
 </head>
 <body>
 
-건강보험공 로그인 성공<br>
+<h1>건강보험공단 로그인 성공<br></h1><br>
 
-<a href = "/linkedData/J_NHIS/Datalist_NEOKtoNHIS.jsp">데이터 요청 목록</a>    <br>
+<ul>
+<li><h2><a href = "./Datalist_NEOKtoNHIS.jsp">데이터 요청 목록</a></h2></li>
+</ul>
 
-<a href = "/linkedData/J_NHIS/sessionLogoutNHIS.jsp">로그아웃</a>
+
+
+	<br>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+	<input type="button" name="back" value="로그아웃"
+		onclick="javascript:location.href='./sessionLogoutNHIS.jsp';" />
+
 
 </body>
 </html>

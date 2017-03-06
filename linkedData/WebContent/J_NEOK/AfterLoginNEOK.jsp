@@ -5,16 +5,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>NECA 승인처 로그인</title>
 </head>
 <body>
 
-NECA 승인처 로그인 성공
+<h1>NECA 승인처 로그인 성공</h1><br><br>
 
- 
-<a href = "/linkedData/J_NEOK/Datalist_RtoNEOK.jsp">연계 데이터 요청 목록</a><br>
-<a href = "/linkedData/J_NEOK/sessionLogoutNEOK.jsp">로그아웃</a>
+ <ul>
+<li><h2><a href = "./Datalist_RtoNEOK.jsp">연계 데이터 요청 목록</a></h2></li>
+ </ul>
 
+
+	<br>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+	<input type="button" name="back" value="로그아웃"
+		onclick="javascript:location.href='./sessionLogoutNEOK.jsp';" />
 
 </body>
 </html>

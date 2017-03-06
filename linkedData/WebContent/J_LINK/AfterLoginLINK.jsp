@@ -4,15 +4,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>연계플랫폼 로그인</title>
 </head>
 <body>
 
-데이터 연계 플랫폼 로그인 성공
-<a href = "/linkedData/J_LINK/sessionLogoutLINK.jsp">로그아웃</a>
-  
+ <h1>데이터 연계 플랫폼 로그인 성공<br/></h1><br>
  
+ <ul>
+<li><h2><a href = "./Datalist_INDEXERtoLINK.jsp">대조표 목록</a></h2></li>
+ </ul>
 
+	<br>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+	<input type="button" name="back" value="로그아웃"
+		onclick="javascript:location.href='./sessionLogoutLINK.jsp';" />
 
 </body>
 </html>

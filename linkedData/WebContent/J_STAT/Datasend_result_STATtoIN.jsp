@@ -1,17 +1,17 @@
 <%@page import="vo.MemberSTAT"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%	String STATid = ((MemberSTAT)request.getSession().getAttribute("STATid")).getSTATId();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>전송 결과</title>
 </head>
 <body>
-NECA INDEXER에 통계청 기관 식별자 전송완료
+<h1>NECA INDEXER에 통계청 기관 식별자 전송완료</h1>
 
-<%	String STATid = ((MemberSTAT)request.getSession().getAttribute("STATid")).getSTATId();
-%>
 
 
 	<script type="text/javascript">  
@@ -24,7 +24,7 @@ NECA INDEXER에 통계청 기관 식별자 전송완료
           ws.onopen = function()
           {
              // Web Socket is connected, send data using send()
-             ws.send("건강보험공단("+STATid+") NECA IDEXER로 기관 식별자 전송..." + "\n");
+             ws.send("건강보험공단(<%=STATid%>) : NECA IDEXER로 기관 식별자 전송" + "\n");
 			};
 
 			ws.onmessage = function(evt) {

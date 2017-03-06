@@ -12,10 +12,10 @@ String Rname = ((MemberR)request.getSession().getAttribute("Rid")).getRName();
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>연구자 로그인</title>
 </head>
 <body>
-연구자 로그인 성공<br/>
+<h1>연구자 로그인 성공<br/></h1><br>
 
 <script type="text/javascript">  
     var ws = new WebSocket("ws://localhost:8080/linkedData/websocket");
@@ -51,8 +51,16 @@ String Rname = ((MemberR)request.getSession().getAttribute("Rid")).getRName();
        }
 
     </script>
+<ul>
+<li><h2><a href = "./DataRequestForm.jsp">데이터 요청</a></h2></li>
+<li><h2><a href = "./Request_list.jsp">데이터 요청 목록</a></h2></li>
+
+
+</ul>
+
+	<br>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+	<input type="button" name="back" value="로그아웃"
+		onclick="javascript:location.href='./sessionLogoutR.jsp';" />
  
-<a href = "/linkedData/J_R/DataRequestForm.jsp">데이터 요청</a><br/>
-<a href = "/linkedData/J_R/sessionLogoutR.jsp">로그아웃</a>
 </body>
 </html>

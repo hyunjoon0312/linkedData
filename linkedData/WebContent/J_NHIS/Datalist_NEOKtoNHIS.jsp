@@ -15,9 +15,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>데이터 목록</title>
 </head>
 <body>
+
+
 	<%
 	String NHISid = ((MemberNHIS)request.getSession().getAttribute("NHISid")).getNHISId();
 	String NHISname = ((MemberNHIS)request.getSession().getAttribute("NHISid")).getNHISName();
@@ -36,7 +38,15 @@
 			rs = stmt.executeQuery(query);
 	%>
 
-		<table border="1" cellspacing="0">
+
+<h1 align="center">건강보험공단 데이터 목록</h1><br>
+		<table id = "tb" border="1" cellspacing="0" style="margin:0 auto; text-align :center;">
+<tr>
+<td>
+
+
+						<table border="1" cellspacing="0">
+		
 			<tr>
 				<th>요청 시간</th>
 				<th>NECA요청자 ID</th>
@@ -102,6 +112,9 @@
 			
 			
 			</tr>
+		</table>
+		</td>
+		</tr>
 		</table>
 	<%
 		

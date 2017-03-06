@@ -5,15 +5,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>통계청 로그인</title>
 </head>
 <body>
 
 
 
-통계청 로그인 성공<br>
-<a href = "/linkedData/J_STAT/Datalist_NEOKtoSTAT.jsp">데이터 요청 목록</a><br>
-<a href = "/linkedData/J_STAT/sessionLogoutSTAT.jsp">로그아웃</a>
+<h1>통계청 로그인 성공<br></h1><br>
+
+<ul>
+<li><h2><a href = "/linkedData/J_STAT/Datalist_NEOKtoSTAT.jsp">데이터 요청 목록</a></h2></li>
+</ul>
+
+
+
+	<br>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+	<input type="button" name="back" value="로그아웃"
+		onclick="javascript:location.href='./sessionLogoutSTAT.jsp';" />
+
 
 </body>
 </html>

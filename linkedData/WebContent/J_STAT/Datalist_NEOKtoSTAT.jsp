@@ -36,7 +36,13 @@
 			rs = stmt.executeQuery(query);
 	%>
 
-		<table border="1" cellspacing="0">
+<h1 align="center">통계청 데이터 목록</h1><br>
+		<table id = "tb" border="1" cellspacing="0" style="margin:0 auto; text-align :center;">
+<tr>
+<td>
+
+
+						<table border="1" cellspacing="0">
 			<tr>
 				<th>요청 시간</th>
 				<th>NECA요청자 ID</th>
@@ -102,6 +108,9 @@
 			
 			
 			</tr>
+		</table>
+		</td>
+		</tr>
 		</table>
 	<%
 		

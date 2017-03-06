@@ -12,10 +12,9 @@ String INname = ((MemberIN)request.getSession().getAttribute("INid")).getINName(
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>NECA INDEXER 로그인</title>
 </head>
 <body>
-NECA INDEXER 로그인 성공<br/>
 
 <script type="text/javascript">  
     var ws = new WebSocket("ws://localhost:8080/linkedData/websocket");
@@ -52,8 +51,14 @@ NECA INDEXER 로그인 성공<br/>
 
     </script>
 
-<br>
-<a href = "/linkedData/J_IN/Datalist_ORGtoINDEXER.jsp">데이터목록</a><br>
-<a href = "/linkedData/J_IN/sessionLogoutIN.jsp">로그아웃</a>
+<h1>NECA INDEXER 로그인 성공<br/></h1><br>
+<ul>
+<li><h2><a href = "./Datalist_ORGtoINDEXER.jsp">데이터목록</a></h2></li>
+</ul>
+
+	<br>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+	<input type="button" name="back" value="로그아웃"
+		onclick="javascript:location.href='./sessionLogoutIN.jsp';" />
+
 </body>
 </html>

@@ -1,23 +1,23 @@
 <%@page import="vo.MemberNHIS"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+String NHISid = ((MemberNHIS)request.getSession().getAttribute("NHISid")).getNHISId();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>전송결과</title>
 </head>
 <body>
 
-<%
-String NHISid = ((MemberNHIS)request.getSession().getAttribute("NHISid")).getNHISId();
-%>
 
 
-LINK에게 데이터 전송완료
+<h1>LINK에게 데이터 전송완료</h1><br>
 
 <script type="text/javascript">  
-    var ws = new WebSocket("ws://localhost:8080/linkedData/websocket");
+    var ws = new WebSocket("ws:/localhost:8080/linkedData/websocket");
 	
        if ("WebSocket" in window)
        {
@@ -26,7 +26,7 @@ LINK에게 데이터 전송완료
           ws.onopen = function()
           {
              // Web Socket is connected, send data using send()
-             ws.send("NHIS("+NHISid+") 연계플랫폼으로 데이터 전송..." + "\n");
+             ws.send("NHIS(<%=NHISid%>) : 연계플랫폼으로 데이터 전송" + "\n");
 			};
 
 			ws.onmessage = function(evt) {

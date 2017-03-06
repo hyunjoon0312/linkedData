@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>건보공단 데이터 요청 결과</title>
 </head>
 <body>
 
@@ -29,19 +29,9 @@ int nhis_send = Integer.parseInt(str_nhis_send);
 if(nhis_send == 0){
 %>
 
-건강보험공단으로 <%=uploadername %> 연구자가 요청한 데이터 전송 성공<br/>
+<h1>건강보험공단으로 <%=uploadername %> 연구자가 요청한 데이터 전송 성공<br/></h1>
 
-<%}else{ %>
-
-이미 전송한 데이터 입니다.
-
-<%} %>
-
-
-
-
-
-  <script type="text/javascript">  
+<script type="text/javascript">  
     var ws = new WebSocket("ws://localhost:8080/linkedData/websocket");
 	
        if ("WebSocket" in window)
@@ -51,7 +41,7 @@ if(nhis_send == 0){
           ws.onopen = function()
           {
              // Web Socket is connected, send data using send()
-        	  ws.send("NECA승인처(<%=NEOKid%>) : <%=uploadername%>연구자 요청한 식별자 건강보험공단 전송..."+"\n");
+        	  ws.send("NECA승인처(<%=NEOKid%>) : <%=uploadername%>연구자 요청한 식별자 건강보험공단 전송"+"\n");
           };
 			
           ws.onmessage = function (evt) 
@@ -78,6 +68,19 @@ if(nhis_send == 0){
     }
  
     </script>
+
+
+<%}else{ %>
+
+이미 전송한 데이터 입니다.<br><br>
+
+<%} %>
+
+
+
+
+
+  
     
     	<input type="button" name="back" value="뒤로가기" onclick="javascript:location.href='./Datalist_RtoNEOK.jsp';"/>
     

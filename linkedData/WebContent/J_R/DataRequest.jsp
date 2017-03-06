@@ -201,7 +201,7 @@ ArrayList<String> readList = new ArrayList<String>();
           ws.onopen = function()
           {
              // Web Socket is connected, send data using send()
-             ws.send("<%=name%>님(연구자) <%=origfilename%> 파일 업로드"+"\n");
+             ws.send("<%=name%>님(연구자) : <%=origfilename%> 파일 업로드"+"\n");
           };
 			
           ws.onmessage = function (evt) 

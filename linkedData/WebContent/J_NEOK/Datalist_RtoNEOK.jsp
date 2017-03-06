@@ -16,8 +16,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<!-- 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	합쳐지고 최소화된 최신 CSS
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	
+	부가적인 테마
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	
+	합쳐지고 최소화된 최신 자바스크립트
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
+<title>데이터 요청 목록</title>
 </head>
 <body>
 
@@ -38,14 +46,18 @@
 			String query = "select * from UploadFileInfo";
 			rs = stmt.executeQuery(query);
 	%>
+<h1 align="center">NECA 승인처 데이터 목록</h1><br>
+		<table id = "tb" border="1" cellspacing="0" style="margin:0 auto; text-align :center;">
+	<tr>
+	<td>
 
-		<table border="1" cellspacing="0">
+				<table border="1" cellspacing="0">
 			<tr>
-				<td>요청 시간</td>
-				<td>제목</td>
-				<td>파일 이름 </td>
-				<td>연구자 ID</td>
-				<td>연구자 이름</td>
+				<th>요청 시간</th>
+				<th>제목</th>
+				<th>파일 이름 </th>
+				<th>연구자 ID</th>
+				<th>연구자 이름</th>
 				<th>건강보험공단</th>
 				<th>통계청</th>
 				<th>데이터 전송 여부</th>
@@ -119,6 +131,9 @@
 			
 			
 			</tr>
+		</table>
+		</td>
+		</tr>
 		</table>
 	<%
 		
