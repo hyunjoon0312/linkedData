@@ -50,6 +50,9 @@ public class DatasendServlet_NHIS extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		request.setCharacterEncoding("utf-8");
+
+		
 		String filename = request.getParameter("filename");
 		String uploadername = request.getParameter("uploadername");
 		String uploaderid = request.getParameter("uploaderid");

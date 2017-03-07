@@ -15,13 +15,14 @@
 		border : 2px double black; 
 		border-radius : 10px;
 		text-align: center;
+		margin-top : 220px;
 	}
 	fieldset{
 		text-align: center;
 		border : none;
 	}
 	#selectButton{
-		margin-top : 10px;
+		margin-top : 20px;
 	}
 	table{
 	    width : 380px;

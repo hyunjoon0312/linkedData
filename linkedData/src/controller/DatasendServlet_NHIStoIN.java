@@ -54,6 +54,8 @@ public class DatasendServlet_NHIStoIN extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		request.setCharacterEncoding("utf-8");
+		
 		String tableName = request.getParameter("tableName");
 		String str_send_indexer = request.getParameter("send_indexer");
 		String NHISid = request.getParameter("NHISid");

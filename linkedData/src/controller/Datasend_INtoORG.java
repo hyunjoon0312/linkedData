@@ -43,6 +43,8 @@ public class Datasend_INtoORG extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		request.setCharacterEncoding("utf-8");
+		
 		String nhisTableName = request.getParameter("nhisTableName");
 		String statTableName = request.getParameter("statTableName");
 		String str_org_send = request.getParameter("org_send");

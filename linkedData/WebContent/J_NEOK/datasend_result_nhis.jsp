@@ -5,13 +5,18 @@
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.DriverManager"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+ 
+request.setCharacterEncoding("UTF-8");
+response.setContentType("text/html; charset=UTF-8"); 
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>°Çº¸°ø´Ü µ¥ÀÌÅÍ ¿äÃ» °á°ú</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ê±´ë³´ê³µë‹¨ ë°ì´í„° ìš”ì²­ ê²°ê³¼</title>
 </head>
 <body>
 
@@ -29,7 +34,7 @@ int nhis_send = Integer.parseInt(str_nhis_send);
 if(nhis_send == 0){
 %>
 
-<h1>°Ç°­º¸Çè°ø´ÜÀ¸·Î <%=uploadername %> ¿¬±¸ÀÚ°¡ ¿äÃ»ÇÑ µ¥ÀÌÅÍ Àü¼Û ¼º°ø<br/></h1>
+<h1>ê±´ê°•ë³´í—˜ê³µë‹¨ìœ¼ë¡œ <%=uploadername %> ì—°êµ¬ìê°€ ìš”ì²­í•œ ë°ì´í„° ì „ì†¡ ì„±ê³µ<br/></h1>
 
 <script type="text/javascript">  
     var ws = new WebSocket("ws://localhost:8080/linkedData/websocket");
@@ -41,7 +46,7 @@ if(nhis_send == 0){
           ws.onopen = function()
           {
              // Web Socket is connected, send data using send()
-        	  ws.send("NECA½ÂÀÎÃ³(<%=NEOKid%>) : <%=uploadername%>¿¬±¸ÀÚ ¿äÃ»ÇÑ ½Äº°ÀÚ °Ç°­º¸Çè°ø´Ü Àü¼Û"+"\n");
+        	  ws.send("NECAìŠ¹ì¸ì²˜(<%=NEOKid%>) : <%=uploadername%>ì—°êµ¬ì ìš”ì²­í•œ ì‹ë³„ì ê±´ê°•ë³´í—˜ê³µë‹¨ ì „ì†¡"+"\n");
           };
 			
           ws.onmessage = function (evt) 
@@ -72,7 +77,7 @@ if(nhis_send == 0){
 
 <%}else{ %>
 
-ÀÌ¹Ì Àü¼ÛÇÑ µ¥ÀÌÅÍ ÀÔ´Ï´Ù.<br><br>
+ì´ë¯¸ ì „ì†¡í•œ ë°ì´í„° ì…ë‹ˆë‹¤.<br><br>
 
 <%} %>
 
@@ -82,7 +87,7 @@ if(nhis_send == 0){
 
   
     
-    	<input type="button" name="back" value="µÚ·Î°¡±â" onclick="javascript:location.href='./Datalist_RtoNEOK.jsp';"/>
+    	<input type="button" name="back" value="ë’¤ë¡œê°€ê¸°" onclick="javascript:location.href='./Datalist_RtoNEOK.jsp';"/>
     
     
 </body>

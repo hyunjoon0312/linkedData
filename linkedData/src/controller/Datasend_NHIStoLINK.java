@@ -47,6 +47,7 @@ public class Datasend_NHIStoLINK extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		request.setCharacterEncoding("utf-8");
 		
 		String nhisID = request.getParameter("NHISid");
 		String tableName = request.getParameter("tableName"); 

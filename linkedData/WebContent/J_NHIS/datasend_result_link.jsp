@@ -14,7 +14,7 @@ String NHISid = ((MemberNHIS)request.getSession().getAttribute("NHISid")).getNHI
 
 
 
-<h1>LINK에게 데이터 전송완료</h1><br>
+<h1>연계플랫폼으로 데이터 전송완료</h1><br>
 
 <script type="text/javascript">  
     var ws = new WebSocket("ws:/localhost:8080/linkedData/websocket");
@@ -25,6 +25,7 @@ String NHISid = ((MemberNHIS)request.getSession().getAttribute("NHISid")).getNHI
       
           ws.onopen = function()
           {
+        	  
              // Web Socket is connected, send data using send()
              ws.send("NHIS(<%=NHISid%>) : 연계플랫폼으로 데이터 전송" + "\n");
 			};

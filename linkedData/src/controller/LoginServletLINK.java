@@ -34,6 +34,10 @@ public class LoginServletLINK extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		
+		request.setCharacterEncoding("utf-8");
+		
 		String LINKid = request.getParameter("LINKid");
 		String LINKpasswd = request.getParameter("LINKpasswd");
 		LoginServiceLINK loginServiceLINK = new LoginServiceLINK();

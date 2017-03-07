@@ -43,6 +43,7 @@ public class Datasend_INtoLINK extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	
+		request.setCharacterEncoding("utf-8");
 		
 		String str_checklist_send = request.getParameter("checklist_send");
 		int checklist_send = Integer.parseInt(str_checklist_send);

@@ -36,6 +36,9 @@ public class LoginServletR extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+	
+		request.setCharacterEncoding("utf-8");
+		
 		String Rid = request.getParameter("Rid");
 		String Rpasswd = request.getParameter("Rpasswd");
 		LoginServiceR loginServiceR = new LoginServiceR();

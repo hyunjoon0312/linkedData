@@ -186,8 +186,8 @@ ArrayList<String> readList = new ArrayList<String>();
 		<input type="hidden" name="filename" value="<%=filename%>"> 
 		<input type="hidden" name="origfilename" value="<%=origfilename%>">
 	</form>
-	<a href="#" onclick="javascript:filecheck.submit()">업로드 확인 및 다운로드
-		페이지 이동</a>
+	<a href="#" onclick="javascript:filecheck.submit()"><h2>업로드 확인 및 다운로드
+		페이지 이동</h2></a>
 		
 		<%-- <% 	String tom_path = System.getProperty("catalina.base");
 			out.println("tomcat 위치 : " +tom_path);

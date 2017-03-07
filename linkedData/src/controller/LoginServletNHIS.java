@@ -34,6 +34,9 @@ public class LoginServletNHIS extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		request.setCharacterEncoding("utf-8");
+		
 		String NHISid = request.getParameter("NHISid");
 		String NHISpasswd = request.getParameter("NHISpasswd");
 		LoginServiceNHIS loginServiceNHIS = new LoginServiceNHIS();

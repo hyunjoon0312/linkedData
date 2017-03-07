@@ -34,6 +34,9 @@ public class LoginServletSTAT extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		request.setCharacterEncoding("utf-8");
+		
 		String STATid = request.getParameter("STATid");
 		String STATpasswd = request.getParameter("STATpasswd");
 		LoginServiceSTAT loginServiceSTAT = new LoginServiceSTAT();

@@ -15,7 +15,7 @@ width:50px; height:50px;  display:inline-block; }
 
 </style>
 <body>
-<h2 align="center">상태확인창</h2>
+<h2>상태확인창</h2>
 
     <br />
     

@@ -47,6 +47,7 @@ public class Datasend_STATtoLINK extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		request.setCharacterEncoding("utf-8");
 		
 		String statID = request.getParameter("STATid");
 		String tableName = request.getParameter("tableName"); 

@@ -44,6 +44,8 @@ public class Data_link extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		request.setCharacterEncoding("utf-8");
+		
 		System.err.println("Data_link.java");
 		
 		String nhisID = request.getParameter("nhisID");
